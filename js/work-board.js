@@ -5,10 +5,10 @@
   if (!board) return;
   const desktop = matchMedia('(min-width: 801px) and (pointer: fine)');
   const slots = [
-    {x: 5, y: 25, w: 31, r: -5},
-    {x: 59, y: 45, w: 32, r: 4},
-    {x: 32, y: 335, w: 30, r: -3},
-    {x: 67, y: 440, w: 25, r: 6}
+    {x: 6, y: 28, w: 26, r: -5},
+    {x: 56, y: 48, w: 36, r: 4},
+    {x: 34, y: 345, w: 29, r: -3},
+    {x: 72, y: 460, w: 21, r: 6}
   ];
   let topZ = 20;
   let suppressed = null;
