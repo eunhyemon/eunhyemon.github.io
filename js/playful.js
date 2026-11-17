@@ -91,7 +91,7 @@
   const contact = document.querySelector('.contact');
   if (contact && fine.matches && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
     let last = 0, count = 0;
-    const colors = ['#B7FF38', '#111111', '#8B8B8B', '#B7FF38'];
+    const colors = ['var(--accent)', '#111111', '#8B8B8B', 'var(--accent)'];
     contact.addEventListener('pointermove', e => {
       const now = performance.now();
       if (now - last < 90 || count > 30) return;
