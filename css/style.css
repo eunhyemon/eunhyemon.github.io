@@ -566,3 +566,22 @@ html.theme-ready #doodle-clear{transition:none}
 @media(pointer:coarse){
   #doodle-clear{display:none}
 }
+
+/* A small hand-sketched underline on selected links only: instant, like a pen mark. */
+@media(hover:hover) and (pointer:fine){
+  header nav a:not(.theme-toggle),.back-to-work,.project-channel a,.project-external a{
+    position:relative;
+  }
+  header nav a:not(.theme-toggle)::after,
+  .back-to-work::after,.project-channel a::after,.project-external a::after{
+    content:"";position:absolute;left:4%;right:3%;bottom:-7px;height:8px;
+    background-color:var(--accent);
+    clip-path:polygon(0% 69%,10% 46%,25% 58%,43% 27%,63% 51%,82% 21%,100% 37%,100% 58%,83% 43%,63% 73%,43% 49%,26% 81%,10% 69%,0% 90%);
+    pointer-events:none;opacity:0;rotate:-2deg;transition:none;
+  }
+  header nav a:not(.theme-toggle):hover::after,
+  header nav a:not(.theme-toggle):focus-visible::after,
+  .back-to-work:hover::after,.back-to-work:focus-visible::after,
+  .project-channel a:hover::after,.project-channel a:focus-visible::after,
+  .project-external a:hover::after,.project-external a:focus-visible::after{opacity:1}
+}
