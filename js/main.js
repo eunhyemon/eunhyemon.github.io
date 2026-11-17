@@ -34,7 +34,7 @@ if(window.gsap&&!matchMedia('(prefers-reduced-motion: reduce)').matches){
 }
 /* Small stagger for About / Contact; classes are applied only when motion is allowed. */
 if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
-  const blocks=document.querySelectorAll('.about > div > *, .contact > *');
+  const blocks=document.querySelectorAll('.about > div:first-child > *, .contact > *');
   if(blocks.length){
     blocks.forEach((el,i)=>{el.classList.add('page-reveal');el.style.setProperty('--page-delay',Math.min(i*115,520)+'ms');});
     requestAnimationFrame(()=>requestAnimationFrame(()=>blocks.forEach(el=>el.classList.add('page-reveal-in'))));
