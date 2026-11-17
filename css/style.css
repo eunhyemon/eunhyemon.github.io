@@ -439,3 +439,26 @@ html.intro-active .site-intro{
   100%{opacity:0;visibility:hidden}
 }
 @media(prefers-reduced-motion:reduce){html.intro-active .site-intro{display:none}}
+
+/* Home composition: the live eyes and intro eyes share the exact viewport center. */
+.home-layout{--home-eye-width:clamp(125px,17vw,195px)}
+.home-layout .hero-main{position:static}
+.home-layout .friend{
+  position:fixed;top:50%;left:50%;width:var(--home-eye-width);
+  translate:-50% -50%;z-index:1;
+}
+.home-layout .hero h1{
+  position:fixed;left:50%;
+  top:calc(50% - (var(--home-eye-width) * 260 / 300 / 2) - 26px);
+  translate:-50% -100%;width:max-content;max-width:94vw;
+  z-index:1;
+}
+.home-layout .hero-bottom{
+  position:fixed;left:50%;
+  top:calc(50% + (var(--home-eye-width) * 260 / 300 / 2) + 25px);
+  translate:-50% 0;width:max-content;max-width:94vw;z-index:1;
+}
+.home-layout #eye-tilt-permission:not([hidden]){
+  position:fixed;left:50%;top:calc(50% + (var(--home-eye-width) * 260 / 300 / 2) + 98px);
+  translate:-50% 0;
+}
