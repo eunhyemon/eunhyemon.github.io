@@ -421,7 +421,7 @@ html.intro-active .site-intro{
   background:var(--bg);pointer-events:auto;
   animation:site-intro-leave 1.15s ease both;
 }
-.site-intro-eyes{display:block;width:clamp(130px,35vw,200px);height:auto;overflow:visible}
+.site-intro-eyes{display:block;width:clamp(125px,17vw,195px);height:auto;overflow:visible}
 .intro-eye-shapes{transform-box:fill-box;transform-origin:center;animation:intro-eye-blink 1.15s ease-in-out both}
 .intro-eye-shapes>path{fill:#fff;stroke:#252522;stroke-width:4.3;stroke-linecap:round;stroke-linejoin:round}
 .intro-eye-pupils{fill:#252522;animation:intro-eye-glance 1.15s ease-in-out both}
