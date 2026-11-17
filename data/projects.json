@@ -1,0 +1,38 @@
+[
+  {
+    "slug": "little-identity",
+    "title": "A Little Identity",
+    "category": "Branding",
+    "year": "2026",
+    "summary": "브랜딩 샘플 프로젝트입니다. 실제 작업물로 교체해주세요.",
+    "role": "Branding · Art direction",
+    "thumbnail": "images/project-01.svg"
+  },
+  {
+    "slug": "moving-type",
+    "title": "Type in Motion",
+    "category": "Motion",
+    "year": "2026",
+    "summary": "모션 샘플 프로젝트입니다. 실제 작업물로 교체해주세요.",
+    "role": "Motion · Typography",
+    "thumbnail": "images/project-02.svg"
+  },
+  {
+    "slug": "nice-world",
+    "title": "Nice Little World",
+    "category": "Graphic",
+    "year": "2025",
+    "summary": "그래픽 샘플 프로젝트입니다. 실제 작업물로 교체해주세요.",
+    "role": "Graphic design",
+    "thumbnail": "images/project-03.svg"
+  },
+  {
+    "slug": "color-study",
+    "title": "Color Study",
+    "category": "Motion",
+    "year": "2025",
+    "summary": "색과 움직임을 탐구하는 샘플 프로젝트입니다.",
+    "role": "Motion · Visual direction",
+    "thumbnail": "images/project-04.svg"
+  }
+]
