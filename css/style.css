@@ -126,10 +126,10 @@ html{background:var(--bg)}
 .theme-toggle{flex:0 0 auto;position:relative;display:inline-flex;align-items:center;justify-content:center;width:68px;min-width:68px;height:38px;min-height:38px;padding:0;border:0;border-radius:0;background:transparent;color:var(--ink);line-height:1;box-shadow:none;cursor:pointer;overflow:hidden}
 .theme-toggle:hover,.theme-toggle:focus-visible,html[data-theme='dark'] .theme-toggle,html[data-theme='dark'] .theme-toggle:hover{background:transparent;border:0;color:var(--ink)}
 .theme-toggle svg{display:block;width:68px;height:30px;overflow:visible}
-.theme-toggle .sun-shape{fill:#F4C900;transform-box:view-box;transform-origin:19px 15px;transform:translateY(0) rotate(0deg);opacity:1}
-.theme-toggle .moon-shape{fill:var(--ink);transform-box:view-box;transform-origin:50px 15px;transform:translateY(24px) rotate(-24deg) scale(.82);opacity:0}
-html[data-theme='dark'] .theme-toggle .sun-shape{transform:translateY(24px) rotate(30deg) scale(.78);opacity:0}
-html[data-theme='dark'] .theme-toggle .moon-shape{transform:translateY(0) rotate(0deg) scale(1);opacity:1}
+.theme-toggle .sun-shape{fill:#F4C900;transform-box:view-box;transform-origin:19px 15px;transform:translate(15px,0) rotate(0deg);opacity:1}
+.theme-toggle .moon-shape{fill:var(--ink);transform-box:view-box;transform-origin:50px 15px;transform:translate(-16px,24px) rotate(-24deg) scale(.82);opacity:0}
+html[data-theme='dark'] .theme-toggle .sun-shape{transform:translate(15px,24px) rotate(30deg) scale(.78);opacity:0}
+html[data-theme='dark'] .theme-toggle .moon-shape{transform:translate(-16px,0) rotate(0deg) scale(1);opacity:1}
 @media(prefers-reduced-motion:no-preference){html.theme-ready .theme-toggle .sun-shape,html.theme-ready .theme-toggle .moon-shape{transition:transform .55s cubic-bezier(.22,.7,.25,1),opacity .38s ease,fill .48s ease}}
 @media(max-width:750px){.theme-toggle{width:56px;min-width:56px;height:34px;min-height:34px}.theme-toggle svg{width:60px;height:27px}}
 /* Dark-only scribbled closed eyes; daylight keeps the moving pupils. */
