@@ -549,7 +549,9 @@ html.theme-ready #doodle-clear{transition:none}
 #doodle-clear .scribble-ring .scribble-outline{stroke-width:3.5}
 #doodle-clear span,#eye-tilt-permission span{
   position:relative;z-index:1;white-space:nowrap;pointer-events:none;
+  translate:7px -4px;rotate:2deg;
 }
+#eye-tilt-permission span{translate:6px -3px;rotate:3deg}
 @media(hover:hover) and (pointer:fine){
   #doodle-clear:hover{rotate:-4deg;color:#fff;background:transparent}
   #doodle-clear:hover .scribble-ring .scribble-fill{fill:var(--accent)}
