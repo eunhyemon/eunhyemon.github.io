@@ -3,13 +3,14 @@
     "slug": "etume",
     "title": "82MAJOR",
     "category": "Motion",
-    "summary": "82MAJOR 채널아트 및 모션 디자인 작업.",
-    "role": "Channel art · Motion design",
+    "summary": "유튜브 '에투메' 채널아트 및 모션 디자인, 캐릭터 디자인 작업",
+    "role": "Channel art · Motion design · Character design",
     "thumbnail": "images/etume-thumb.gif",
     "images": [
       "images/etume-channel-art.jpg"
     ],
-    "video": "images/etume-motion.mp4"
+    "video": "images/etume-motion.mp4",
+    "channelUrl": "https://www.youtube.com/@etume82"
   },
   {
     "slug": "jenny-park",
@@ -18,7 +19,10 @@
     "thumbnail": "images/jenny-01-thumbs.png",
     "images": [
       "images/jenny-01-motion.gif"
-    ]
+    ],
+    "summary": "유튜브 '제니파크' 채널아트 및 모션 디자인, 캐릭터 디자인 작업",
+    "role": "Channel art · Motion design · Character design",
+    "channelUrl": "https://www.youtube.com/@__Jennypark__"
   },
   {
     "slug": "moving-type",
