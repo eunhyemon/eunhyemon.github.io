@@ -529,11 +529,11 @@ html.theme-ready #doodle-clear{transition:none}
   cursor:pointer;transition:none;
 }
 #doodle-clear{
-  width:186px;height:58px;font-size:15px;
+  width:186px;height:68px;font-size:15px;
   rotate:-4deg;
 }
 #eye-tilt-permission{
-  width:167px;height:53px;font-size:15px;
+  width:167px;height:61px;font-size:15px;
   rotate:-4deg;
 }
 #eye-tilt-permission[hidden]{display:none}
@@ -542,21 +542,17 @@ html.theme-ready #doodle-clear{transition:none}
   overflow:visible;pointer-events:none;
   translate:-4px 3px;rotate:-3deg;
 }
-.scribble-ring path{
-  fill:none;stroke:var(--accent);stroke-width:2.8;
-  stroke-linecap:round;stroke-linejoin:round;
+.scribble-ring .scribble-outline{
+  fill:var(--accent);stroke:none;
 }
-.scribble-ring .scribble-fill{fill:transparent;stroke:none}
-.scribble-ring .scribble-overrun{stroke-width:2.25;fill:none}
-#doodle-clear .scribble-ring .scribble-outline{stroke-width:3.5}
 #doodle-clear span,#eye-tilt-permission span{
   position:relative;z-index:1;white-space:nowrap;pointer-events:none;
   translate:6px -2px;rotate:2deg;
 }
 #eye-tilt-permission span{translate:5px -2px;rotate:3deg}
 @media(hover:hover) and (pointer:fine){
-  #doodle-clear:hover{rotate:-4deg;color:#fff;background:transparent}
-  #doodle-clear:hover .scribble-ring .scribble-fill{fill:var(--accent)}
+  #doodle-clear:hover{rotate:-4deg;color:var(--accent);background:transparent}
+  #doodle-clear:hover .scribble-ring .scribble-outline{fill:var(--ink)}
 }
 #eye-tilt-permission:not(:disabled):active{color:var(--accent)}
 #eye-tilt-permission:disabled{opacity:.65;cursor:default}
@@ -565,7 +561,7 @@ html.theme-ready #doodle-clear{transition:none}
   translate:-50% 0;
 }
 #eye-tilt-permission:not([hidden]) + #eye-touch-hint{
-  top:calc(50% + (var(--home-eye-width) * 260 / 300 / 2) + 148px);
+  top:calc(50% + (var(--home-eye-width) * 260 / 300 / 2) + 154px);
 }
 @media(pointer:coarse){
   #doodle-clear{display:none}
