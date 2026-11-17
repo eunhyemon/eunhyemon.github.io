@@ -413,3 +413,29 @@ header nav a,footer a,.project-external a{display:inline-block}
 .project-channel a,.project-external a{text-decoration:none}
 .project-channel a:hover,.project-external a:hover{color:var(--accent)}
 @media(prefers-reduced-motion:reduce){#doodle-clear{transition:none}}
+
+/* First-visit sketch intro: one blue stroke, then immediately reveal the home. */
+.site-intro{display:none}
+html.intro-active .site-intro{
+  position:fixed;inset:0;z-index:9999;
+  display:grid;place-items:center;
+  background:var(--bg);pointer-events:auto;
+  animation:site-intro-leave 1.05s ease both;
+}
+.site-intro-stroke{display:block;width:min(340px,74vw);height:auto;overflow:visible}
+.site-intro-stroke path{
+  fill:none;stroke:var(--accent);stroke-width:5;
+  stroke-linecap:round;stroke-linejoin:round;
+  stroke-dasharray:720;stroke-dashoffset:720;
+  animation:site-intro-draw 1.05s ease-in-out both;
+}
+@keyframes site-intro-draw{
+  0%{stroke-dashoffset:720}
+  55%{stroke-dashoffset:0}
+  77%,100%{stroke-dashoffset:-720}
+}
+@keyframes site-intro-leave{
+  0%,76%{opacity:1}
+  100%{opacity:0;visibility:hidden}
+}
+@media(prefers-reduced-motion:reduce){html.intro-active .site-intro{display:none}}
