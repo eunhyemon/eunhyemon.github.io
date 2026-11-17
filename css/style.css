@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Schoolbell&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=DM+Serif+Display:ital@0;1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Chiron+GoRound+TC:wght@300;400;500&family=Noto+Sans+KR:wght@300;400;500&family=Schoolbell&display=swap');
+500;600;700;800&family=DM+Serif+Display:ital@0;1&display=swap');
 :root{--bg:#f9f9f7;--ink:#181818;--soft:#ececea;--muted:#777}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -138,3 +138,25 @@ footer{font-size:14px}
 .hero-bottom p{font-size:16px}
 .meta h3{font-size:22px}
 @media(max-width:750px){.hero h1{font-size:clamp(42px,10vw,62px)}.section-title h2{font-size:clamp(34px,8vw,45px)}.about h2{font-size:clamp(34px,8vw,48px)}.contact h2{font-size:clamp(40px,10vw,60px)}}
+
+/* Refined small-scale type system */
+:root{--sans:'Chiron GoRound TC','Noto Sans KR',sans-serif;--display:'Schoolbell',cursive}
+body{font-family:var(--sans);font-weight:400}
+.hero h1,.section-title h2,.about h2,.contact h2,.meta h3{font-family:var(--display);font-weight:400}
+.hero h1{font-size:clamp(38px,5vw,64px);line-height:1.18;letter-spacing:-.015em}
+.section-title h2{font-size:clamp(32px,3.6vw,45px)}
+.about h2{font-size:clamp(34px,4vw,50px)}
+.contact h2{font-size:clamp(36px,4.7vw,58px)}
+.hero-bottom p{font-family:var(--sans);font-size:14px;font-weight:400;line-height:1.8}
+.hero-bottom b{font-weight:400}
+header .logo,nav,small,.filters button,.meta p,.meta time,.about p,.contact>a,footer,.detail p,.detail small{font-family:var(--sans)}
+header .logo{font-size:17px}
+nav{font-size:12px}
+.filters button{font-size:13px}
+.meta h3{font-size:21px}
+.meta p,.meta time{font-size:12px}
+.about p{font-size:14px}
+.contact>a{font-size:14px}
+footer{font-size:11px}
+.hero{min-height:68svh}
+@media(max-width:750px){.hero h1{font-size:clamp(38px,9vw,52px)}.section-title h2{font-size:clamp(30px,7vw,40px)}.about h2{font-size:clamp(32px,8vw,44px)}.contact h2{font-size:clamp(36px,9vw,50px)}}
