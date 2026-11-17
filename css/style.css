@@ -155,3 +155,26 @@ html[data-theme='dark'] .friend .eyes-shut{display:inline}
   #work #projects .meta h3{font-size:16px}
 }
 @media(max-width:520px){#work #projects.grid{grid-template-columns:1fr;max-width:470px;gap:38px}}
+
+/* Work file-browser collage: always-visible captions below images, no image hover treatments. */
+#work{padding-top:35px}
+#work .filters{margin:12px 0 34px;gap:27px}
+#work #projects .project .meta,
+#work #projects .project:hover .meta,
+#work #projects .project:focus-visible .meta{
+  position:static;inset:auto;display:block;opacity:1;visibility:visible;
+  transform:none;background:transparent;padding:10px 4px 0;margin:0;
+  pointer-events:none;text-align:center
+}
+#work #projects .project .meta h3{font-family:'LineSeed','Apple SD Gothic Neo',sans-serif;font-weight:400;font-size:12px;line-height:1.5;margin:0;color:var(--ink);overflow-wrap:anywhere}
+#work #projects .project .cover{filter:none}
+#work #projects .project:hover .cover img,#work #projects .project:focus-visible .cover img{transform:none}
+#work #projects .project .cover img{transition:none}
+@media(min-width:801px) and (pointer:fine){
+  #work #projects .project.is-dragging .meta{opacity:1;visibility:visible}
+  #work #projects .project:hover .cover{box-shadow:0 7px 20px rgba(0,0,0,.065)}
+}
+@media(max-width:800px),(pointer:coarse){
+  #work #projects .project .meta{padding:10px 3px 0}
+  #work #projects .project .meta h3{font-size:12px}
+}
