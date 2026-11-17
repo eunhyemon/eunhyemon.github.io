@@ -9,8 +9,8 @@ if(grid){
       const preview=typeof p.preview==='string'?p.preview:'';
       const motion=/\.(mp4|webm)(?:[?#]|$)/i.test(preview);
       const pic=motion?p.thumbnail:(preview||p.thumbnail);
-      const media=motion?`<video class="preview-video" src="${esc(preview)}" poster="${esc(p.thumbnail)}" muted loop playsinline preload="none" aria-hidden="true"></video>`:'';
-      return `<a class="project" href="project.html?slug=${encodeURIComponent(p.slug)}" aria-label="${esc(p.title)} 상세 보기"><span class="cover"><img src="${esc(pic)}" alt="" loading="lazy">${media}</span><span class="meta"><span><h3>${esc(p.title)}</h3><p>${esc(p.category)}</p></span><time>${esc(p.year)}</time></span></a>`;
+      
+      return `<a class="project" href="project.html?slug=${encodeURIComponent(p.slug)}" aria-label="${esc(p.title)} 상세 보기"><span class="cover"><img src="${esc(pic)}" alt="" loading="lazy"></span><span class="meta"><h3>${esc(p.title)}</h3></span></a>`;
     }).join(''):'<p class="empty">프로젝트가 아직 없어요.</p>';
     grid.dispatchEvent(new CustomEvent('work:rendered'));
     if(window.ScrollTrigger)ScrollTrigger.refresh();
@@ -19,19 +19,6 @@ if(grid){
     document.querySelectorAll('.filters button').forEach(x=>x.classList.remove('active'));
     b.classList.add('active');render(b.dataset.filter);
   }));
-  const mayAnimate=matchMedia('(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference)').matches;
-  if(mayAnimate){
-    grid.addEventListener('pointerover',e=>{
-      const card=e.target.closest('.project');if(!card||!grid.contains(card))return;
-      const vid=card.querySelector('.preview-video');if(!vid||e.relatedTarget&&card.contains(e.relatedTarget))return;
-      vid.play().catch(()=>{});
-    });
-    grid.addEventListener('pointerout',e=>{
-      const card=e.target.closest('.project');if(!card||!grid.contains(card))return;
-      const vid=card.querySelector('.preview-video');if(!vid||e.relatedTarget&&card.contains(e.relatedTarget))return;
-      vid.pause();vid.currentTime=0;
-    });
-  }
   fetch('data/projects.json').then(r=>{if(!r.ok)throw Error('unavailable');return r.json()}).then(data=>{projects=data;render()}).catch(()=>grid.innerHTML='<p class="empty">프로젝트 데이터를 불러오지 못했어요.</p>');
 }
 const friend=document.querySelector('.friend');const eyes=document.querySelector('#pupils');
