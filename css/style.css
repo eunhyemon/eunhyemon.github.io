@@ -193,13 +193,13 @@ html[data-theme='dark'] .friend .eyes-shut{display:inline}
 
 /* Keep the original aspect ratio and vary collage sizes without oversized cards. */
 #work #projects .project .cover{aspect-ratio:auto;display:block;width:100%;height:auto;overflow:hidden}
-#work #projects .project .cover img{display:block;width:100%;height:auto;max-height:310px;object-fit:contain;object-position:center}
+#work #projects .project .cover img{display:block;width:100%;height:auto;max-height:230px;object-fit:contain;object-position:center}
 @media(min-width:801px) and (pointer:fine){
-  #work #projects .project{max-width:390px}
+  #work #projects .project{max-width:300px}
 }
 @media(max-width:800px),(pointer:coarse){
   #work #projects .project{max-width:100%}
-  #work #projects .project .cover img{max-height:290px}
+  #work #projects .project .cover img{max-height:230px}
 }
 
 /* Project details: Korean-first typography, including all project headings and paging. */
@@ -267,3 +267,6 @@ html[data-theme='dark'] .friend .eyes-shut{display:inline}
 #work #projects .project.is-dragging .meta h3{color:var(--accent)}
 /* Keep the bottom back-navigation but remove its empty copyright column. */
 footer{justify-content:flex-end}
+
+/* Fit whole thumbnails within the smaller frame without distorting tall originals. */
+#work #projects .project .cover img{width:auto;max-width:100%;height:auto;max-height:230px;margin-inline:auto}
