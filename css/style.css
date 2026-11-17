@@ -449,7 +449,7 @@ html.intro-active .site-intro{
 }
 .home-layout .hero h1{
   position:fixed;left:50%;
-  top:calc(50% - (var(--home-eye-width) * 260 / 300 / 2) - 62px);
+  top:calc(50% - (var(--home-eye-width) * 260 / 300 / 2) - 90px);
   translate:-50% -100%;width:max-content;max-width:94vw;
   z-index:1;
 }
@@ -461,4 +461,9 @@ html.intro-active .site-intro{
 .home-layout #eye-tilt-permission:not([hidden]){
   position:fixed;left:50%;top:calc(50% + (var(--home-eye-width) * 260 / 300 / 2) + 98px);
   translate:-50% 0;
+}
+
+/* Keep the raised headline readable on short mobile screens, too. */
+@media(max-height:700px){
+  .home-layout .hero h1{font-size:clamp(31px,7vw,42px);top:calc(50% - (var(--home-eye-width) * 260 / 300 / 2) - 70px)}
 }
