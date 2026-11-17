@@ -1,3 +1,4 @@
+@font-face{font-family:'HsHwalgongGulim';src:url('https://cdn.jsdelivr.net/gh/Project-Noonnu/2611111643@hs/hs/HSHwalgongGulim-Light.woff2') format('woff2');font-weight:200;font-display:swap}@font-face{font-family:'HsHwalgongGulim';src:url('https://cdn.jsdelivr.net/gh/Project-Noonnu/2611111643@hs/hs/HSHwalgongGulim-Regular.woff2') format('woff2');font-weight:400;font-display:swap}
 @import url('https://fonts.googleapis.com/css2?family=Chiron+GoRound+TC:wght@300;400;500&family=Noto+Sans+KR:wght@300;400;500&family=Schoolbell&display=swap');
 500;600;700;800&family=DM+Serif+Display:ital@0;1&display=swap');
 :root{--bg:#f9f9f7;--ink:#181818;--soft:#ececea;--muted:#777}
@@ -160,3 +161,24 @@ nav{font-size:12px}
 footer{font-size:11px}
 .hero{min-height:68svh}
 @media(max-width:750px){.hero h1{font-size:clamp(38px,9vw,52px)}.section-title h2{font-size:clamp(30px,7vw,40px)}.about h2{font-size:clamp(32px,8vw,44px)}.contact h2{font-size:clamp(36px,9vw,50px)}}
+
+/* Multi-page navigation and HS Hwalgong Gulim */
+:root{--sans:'HsHwalgongGulim',sans-serif;--display:'HsHwalgongGulim',sans-serif}
+body,header .logo,nav,small,.filters button,.meta p,.meta time,.about p,.contact>a,footer,.detail p,.detail small{font-family:var(--sans)}
+.hero h1,.section-title h2,.about h2,.contact h2,.meta h3,.hero h1 em,.section-title em,.about em,.contact em{font-family:var(--display);font-weight:200;font-style:normal}
+.hero h1{font-size:clamp(35px,4.5vw,60px);letter-spacing:-.045em}
+.section-title h2{font-size:clamp(30px,3.4vw,44px)}
+.about h2{font-size:clamp(32px,3.8vw,48px)}
+.contact h2{font-size:clamp(34px,4.2vw,54px)}
+.hero{min-height:72svh}
+.page{min-height:calc(100svh - 155px)}
+.page .work{border-top:0;padding-top:80px}
+.page .about{border-top:0;min-height:70svh}
+.page .contact{border-top:0;min-height:70svh}
+.home-links{max-width:540px;margin:0 auto 110px;padding:0 25px}
+.home-links a{display:flex;justify-content:space-between;align-items:center;padding:22px 0;border-bottom:1px solid #ddd;font-size:16px}
+.home-links a:hover{color:var(--pink)}
+.home-links a span{font-size:18px}
+.float-title{will-change:transform}
+@media(max-width:750px){.hero h1{font-size:clamp(35px,8vw,50px)}.page .work{padding-top:60px}.home-links{margin-bottom:75px}}
+@media(prefers-reduced-motion:reduce){.float-title{transform:none!important}}
