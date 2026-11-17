@@ -414,25 +414,25 @@ header nav a,footer a,.project-external a{display:inline-block}
 .project-channel a:hover,.project-external a:hover{color:var(--accent)}
 @media(prefers-reduced-motion:reduce){#doodle-clear{transition:none}}
 
-/* First-visit sketch intro: one blue stroke, then immediately reveal the home. */
+/* First-visit hand-drawn eye intro, reusing the exact home eye silhouettes. */
 .site-intro{display:none}
 html.intro-active .site-intro{
-  position:fixed;inset:0;z-index:9999;
-  display:grid;place-items:center;
+  position:fixed;inset:0;z-index:9999;display:grid;place-items:center;
   background:var(--bg);pointer-events:auto;
-  animation:site-intro-leave 1.05s ease both;
+  animation:site-intro-leave 1.15s ease both;
 }
-.site-intro-stroke{display:block;width:min(340px,74vw);height:auto;overflow:visible}
-.site-intro-stroke path{
-  fill:none;stroke:var(--accent);stroke-width:5;
-  stroke-linecap:round;stroke-linejoin:round;
-  stroke-dasharray:720;stroke-dashoffset:720;
-  animation:site-intro-draw 1.05s ease-in-out both;
+.site-intro-eyes{display:block;width:clamp(130px,35vw,200px);height:auto;overflow:visible}
+.intro-eye-shapes{transform-box:fill-box;transform-origin:center;animation:intro-eye-blink 1.15s ease-in-out both}
+.intro-eye-shapes>path{fill:#fff;stroke:#252522;stroke-width:4.3;stroke-linecap:round;stroke-linejoin:round}
+.intro-eye-pupils{fill:#252522;animation:intro-eye-glance 1.15s ease-in-out both}
+@keyframes intro-eye-glance{
+  0%,14%{transform:translate(-5px,1px)}
+  35%,48%{transform:translate(7px,0)}
+  62%,100%{transform:translate(-3px,1px)}
 }
-@keyframes site-intro-draw{
-  0%{stroke-dashoffset:720}
-  55%{stroke-dashoffset:0}
-  77%,100%{stroke-dashoffset:-720}
+@keyframes intro-eye-blink{
+  0%,64%,80%,100%{transform:scaleY(1)}
+  70%,74%{transform:scaleY(.07)}
 }
 @keyframes site-intro-leave{
   0%,76%{opacity:1}
