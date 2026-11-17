@@ -396,3 +396,20 @@ header nav a,footer a,.project-external a{display:inline-block}
 @media(prefers-reduced-motion:reduce){
   header .logo,header nav a,footer a,.back-to-work,.project-pager a,.project-channel a,.project-external a,.contact>a{transition:none}
 }
+
+/* Hand-drawn, slightly tilted clear button. Keep its centered positioning. */
+#doodle-clear{rotate:-4deg;transition:rotate .22s ease,background-color .22s ease,color .22s ease}
+@media(hover:hover) and (pointer:fine){#doodle-clear:hover{rotate:1deg}}
+/* iOS needs a direct tap to grant phone orientation access. */
+#eye-tilt-permission[hidden]{display:none}
+#eye-tilt-permission{
+  position:relative;z-index:4;align-self:center;flex:0 0 auto;
+  background:none;border:0;padding:4px 8px;color:var(--muted);
+  font:400 12px/1.5 'Schoolbell',cursive;cursor:pointer;rotate:-4deg
+}
+#eye-tilt-permission:not(:disabled):active{color:var(--accent)}
+@media(pointer:fine){#eye-tilt-permission{display:none}}
+/* A small tilted label reads better than an underlined link on this portfolio. */
+.project-channel a,.project-external a{text-decoration:none}
+.project-channel a:hover,.project-external a:hover{color:var(--accent)}
+@media(prefers-reduced-motion:reduce){#doodle-clear{transition:none}}
