@@ -5,6 +5,19 @@
   const clear = document.getElementById('doodle-clear');
   const fine = matchMedia('(pointer:fine)');
   if (hero && canvas && clear && fine.matches) {
+    const hint = document.getElementById('doodle-hint');
+    if (hint) {
+      canvas.addEventListener('pointerenter', () => hint.classList.add('is-visible'));
+      canvas.addEventListener('pointermove', e => {
+        const bounds = hero.getBoundingClientRect();
+        const x = Math.max(0, Math.min(e.clientX - bounds.left, bounds.width - 125));
+        const y = Math.max(0, Math.min(e.clientY - bounds.top, bounds.height - 32));
+        hint.style.left = x + 'px';
+        hint.style.top = y + 'px';
+      }, {passive:true});
+      canvas.addEventListener('pointerleave', () => hint.classList.remove('is-visible'));
+      canvas.addEventListener('pointercancel', () => hint.classList.remove('is-visible'));
+    }
     const ctx = canvas.getContext('2d');
     if (ctx) {
       const lines = [];
