@@ -91,3 +91,39 @@ header{text-align:left}
 footer{text-align:left}
 .reveal-ready{will-change:transform,opacity}
 @media(max-width:750px){.hero{min-height:85svh}.hero-main{flex-wrap:nowrap}.hero h1{font-size:clamp(55px,12vw,85px)}.friend{width:115px;margin:0}.grid{gap:70px}.work{padding-top:90px}.about{padding:110px 6%}.contact{padding:120px 6%}.section-title h2{font-size:52px}}
+
+/* Schoolbell / black, white, vivid pink */
+@import url('https://fonts.googleapis.com/css2?family=Schoolbell&display=swap');
+:root{--bg:#fff;--ink:#111;--soft:#f5f5f5;--muted:#666;--pink:#ff2d87}
+body{background:#fff;color:#111;font-family:'Schoolbell','Apple SD Gothic Neo',sans-serif}
+header,.work,.about{background:#fff}
+header .logo{font-size:23px;font-weight:400;letter-spacing:0}
+nav,small,.filters button,.meta p,.meta time,footer{font-family:'Schoolbell','Apple SD Gothic Neo',sans-serif;font-weight:400}
+nav{font-size:15px}
+.hero{padding-top:0}
+.hero h1{font-family:'Schoolbell','Apple SD Gothic Neo',sans-serif;font-weight:400;letter-spacing:-.035em;line-height:1.12;font-size:clamp(72px,11vw,156px)}
+.hero h1 em,.section-title em,.about em,.contact em{font-family:inherit;font-weight:400;font-style:normal}
+.hero h1 em{color:var(--pink)}
+.hero-bottom p{font-size:19px}
+.friend svg path:first-child{fill:#fff}
+.friend svg{filter:none}
+.friend small{color:var(--pink)}
+.section-title h2,.about h2,.contact h2{font-family:'Schoolbell','Apple SD Gothic Neo',sans-serif;font-weight:400;letter-spacing:-.025em}
+.section-title h2{font-size:clamp(55px,7vw,90px)}
+.section-title em{color:var(--pink)}
+.about h2{font-size:clamp(50px,6vw,82px)}
+.contact{background:#fff;border-top:1px solid #eee}
+.contact h2{font-size:clamp(66px,9vw,120px)}
+.contact em{color:var(--pink)}
+.filters button{font-size:17px}
+.filters button.active{color:var(--pink);text-decoration-color:var(--pink)}
+.meta h3{font-family:'Schoolbell','Apple SD Gothic Neo',sans-serif;font-size:25px;font-weight:400}
+.meta p,.meta time{font-size:15px}
+.cover{background:#f5f5f5;filter:grayscale(1)}
+.about p{font-family:'Schoolbell','Apple SD Gothic Neo',sans-serif;font-size:20px}
+.contact>a{font-family:'Schoolbell','Apple SD Gothic Neo',sans-serif;font-size:19px;font-weight:400}
+.contact>a:hover,nav a:hover{color:var(--pink);opacity:1}
+footer{font-size:14px}
+#close{background:#111;font-family:'Schoolbell',sans-serif;font-size:16px;font-weight:400}
+.detail h2{font-family:'Schoolbell',sans-serif;font-weight:400}
+@media(max-width:750px){.hero h1{font-size:clamp(66px,12vw,94px)}nav{font-size:13px}.section-title h2{font-size:57px}}
