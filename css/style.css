@@ -383,7 +383,7 @@ html[data-theme='dark'] #work #projects .project.is-dragging .cover::after{opaci
 /* Subtle hand-set tilt on text links; avoid the draggable Work collage cards. */
 header .logo,header nav a,footer a,.back-to-work,.project-pager a,.project-channel a,.project-external a,.contact>a{
   rotate:0deg;
-  transition:rotate .24s cubic-bezier(.2,.75,.25,1),color .24s ease;
+  transition:none;
   transform-origin:50% 55%;
 }
 header nav a,footer a,.project-external a{display:inline-block}
@@ -398,7 +398,7 @@ header nav a,footer a,.project-external a{display:inline-block}
 }
 
 /* Hand-drawn, slightly tilted clear button. Keep its centered positioning. */
-#doodle-clear{rotate:-4deg;transition:rotate .22s ease,background-color .22s ease,color .22s ease}
+#doodle-clear{rotate:-4deg;transition:none}
 /* Hover changes the fill only; the -4deg tilt stays fixed. */
 /* iOS needs a direct tap to grant phone orientation access. */
 #eye-tilt-permission[hidden]{display:none}
@@ -500,3 +500,10 @@ html.intro-active .site-intro{
   .home-layout .hero h1 .home-word-makes{top:calc(50% + 75px)}
   .home-layout .hero-bottom{bottom:32px}
 }
+
+/* Hover feedback changes instantly (no easing); keep theme-switch animations elsewhere. */
+html.theme-ready header .logo,html.theme-ready header nav a,
+html.theme-ready footer a,html.theme-ready .back-to-work,
+html.theme-ready .project-pager a,html.theme-ready .project-channel a,
+html.theme-ready .project-external a,html.theme-ready .contact>a,
+html.theme-ready #doodle-clear{transition:none}
