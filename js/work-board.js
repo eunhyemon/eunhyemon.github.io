@@ -89,6 +89,20 @@
       card.removeEventListener('pointercancel',end);
       if(moved){
         card.classList.remove('is-dragging');
+        // A tiny paper-settle wobble, only after a completed mouse drag.
+        // Animate rotation on the card itself, preserving its scattered base angle.
+        if(e.type==='pointerup' && !matchMedia('(prefers-reduced-motion: reduce)').matches){
+          const base=getComputedStyle(card).getPropertyValue('--rotation').trim() || '0deg';
+          const deg=parseFloat(base) || 0;
+          card.getAnimations().filter(anim=>anim.id==='work-card-settle').forEach(anim=>anim.cancel());
+          const settle=card.animate([
+            {transform:`rotate(${deg+2.2}deg)`,offset:0},
+            {transform:`rotate(${deg-1.1}deg)`,offset:.48},
+            {transform:`rotate(${deg+.35}deg)`,offset:.78},
+            {transform:`rotate(${deg}deg)`,offset:1}
+          ],{duration:420,easing:'ease-out'});
+          settle.id='work-card-settle';
+        }
         // A released drag must not follow the link; a simple click still navigates.
         const block=click=>{click.preventDefault();click.stopImmediatePropagation();};
         card.addEventListener('click',block,{capture:true,once:true});
