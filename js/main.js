@@ -2,7 +2,7 @@ const grid=document.querySelector('#projects');let projects=[];
 const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 if(grid){
   function render(cat='All'){
-    const list=projects.filter(p=>cat==='All'||p.category===cat);
+    const list=projects.filter(p=>cat==='All'||(Array.isArray(p.categories)?p.categories.includes(cat):p.category===cat));
     const count=document.querySelector('#count');
     if(count)count.textContent=String(list.length).padStart(2,'0')+' PROJECTS';
     grid.innerHTML=list.length?list.map(p=>{
