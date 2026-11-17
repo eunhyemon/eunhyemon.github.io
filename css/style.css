@@ -379,3 +379,20 @@ html[data-theme='dark'] #work #projects .project.is-dragging .cover::after{opaci
 .project-channel{margin:0 auto 24px;text-align:center}
 .project-channel a{display:inline-block;color:var(--ink);font-size:12px;letter-spacing:.035em;text-decoration:underline;text-underline-offset:5px;transition:color .2s ease}
 .project-channel a:hover,.project-channel a:focus-visible{color:var(--accent)}
+
+/* Subtle hand-set tilt on text links; avoid the draggable Work collage cards. */
+header .logo,header nav a,footer a,.back-to-work,.project-pager a,.project-channel a,.project-external a,.contact>a{
+  rotate:0deg;
+  transition:rotate .24s cubic-bezier(.2,.75,.25,1),color .24s ease;
+  transform-origin:50% 55%;
+}
+header nav a,footer a,.project-external a{display:inline-block}
+@media(hover:hover) and (pointer:fine){
+  header .logo:hover,header nav a:hover,footer a:hover,.back-to-work:hover,
+  .project-pager a:hover,.project-channel a:hover,.project-external a:hover,.contact>a:hover{
+    rotate:-3deg;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  header .logo,header nav a,footer a,.back-to-work,.project-pager a,.project-channel a,.project-external a,.contact>a{transition:none}
+}
