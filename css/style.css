@@ -2,7 +2,7 @@
 @font-face{font-family:'LineSeed';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Th.woff2') format('woff2');font-weight:100;font-display:swap}
 @font-face{font-family:'LineSeed';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Rg.woff2') format('woff2');font-weight:400;font-display:swap}
 @font-face{font-family:'LineSeed';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');font-weight:700;font-display:swap}
-:root{--ink:#111111;--accent:#172FE7;--bg:#FFFFFF}
+:root{--ink:#111111;--accent:#0F50E2;--bg:#FFFFFF}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:'LineSeed','Apple SD Gothic Neo',sans-serif;font-weight:400;-webkit-font-smoothing:antialiased}
@@ -66,7 +66,7 @@ dialog::backdrop{background:#111b}
 
 /* Smooth theme switch with neon green accent. */
 :root{color-scheme:light;--surface:#FFFFFF;--soft:#F3F3F3;--muted:#6F6F6F;--overlay:rgba(255,255,255,.94);--dialog-backdrop:#111b}
-html[data-theme='dark']{color-scheme:dark;--bg:#111111;--ink:#F5F5F5;--accent:#172FE7;--surface:#111111;--soft:#1D1D1D;--muted:#A8A8A8;--overlay:rgba(17,17,17,.94);--dialog-backdrop:#000c}
+html[data-theme='dark']{color-scheme:dark;--bg:#111111;--ink:#F5F5F5;--accent:#0F50E2;--surface:#111111;--soft:#1D1D1D;--muted:#A8A8A8;--overlay:rgba(17,17,17,.94);--dialog-backdrop:#000c}
 body{background:var(--bg);color:var(--ink)}
 .theme-toggle{display:inline-flex;align-items:center;justify-content:center;min-width:42px;min-height:36px;border:1px solid currentColor;border-radius:100px;background:transparent;color:var(--ink);font-family:'LineSeed',sans-serif;font-size:12px;line-height:1;white-space:nowrap}
 .theme-toggle:hover{color:var(--accent);border-color:var(--accent)}
@@ -183,7 +183,7 @@ html[data-theme='dark'] .friend .eyes-shut{display:inline}
 #work #projects .project.is-dragging .cover{
   outline:2px solid var(--accent);
   outline-offset:5px;
-  box-shadow:0 0 0 8px rgba(23,47,231,.18);
+  box-shadow:0 0 0 8px rgba(15,80,226,.18);
 }
 #work #projects .project.is-dragging .meta h3{color:var(--accent)}
 #work #projects .project::selection,#work #projects .project *::selection{
@@ -213,7 +213,7 @@ html[data-theme='dark'] .friend .eyes-shut{display:inline}
 #work #projects .project .cover,
 #work #projects .project:hover .cover,
 #work #projects .project .cover img{background:transparent;box-shadow:none}
-#work #projects .project.is-dragging .cover{outline:2px solid var(--accent);outline-offset:5px;box-shadow:0 0 0 8px rgba(23,47,231,.18)}
+#work #projects .project.is-dragging .cover{outline:2px solid var(--accent);outline-offset:5px;box-shadow:0 0 0 8px rgba(15,80,226,.18)}
 
 /* Delayed reveal, intentionally subtle so imagery stays dominant. */
 @media(prefers-reduced-motion:no-preference){
@@ -261,7 +261,7 @@ html[data-theme='dark'] .friend .eyes-shut{display:inline}
 }
 #work #projects .project.is-dragging .cover{
   outline:3px solid var(--accent);outline-offset:5px;
-  box-shadow:0 0 0 8px rgba(23,47,231,.24)
+  box-shadow:0 0 0 8px rgba(15,80,226,.24)
 }
 #work #projects .project.is-dragging .cover::after{opacity:.25}
 #work #projects .project.is-dragging .meta h3{color:var(--accent)}
@@ -279,7 +279,7 @@ footer{justify-content:flex-end}
   position:absolute;left:50%;bottom:40px;transform:translateX(-50%);z-index:3;
   border:0;border-radius:0;background:var(--accent);
   clip-path:polygon(5% 8%,13% 4%,23% 8%,34% 2%,47% 6%,57% 3%,69% 7%,82% 2%,94% 10%,99% 25%,97% 39%,100% 55%,95% 76%,89% 94%,76% 97%,63% 93%,49% 99%,36% 95%,23% 98%,12% 91%,4% 94%,1% 75%,3% 59%,0% 44%,3% 25%);
-  color:#111111;padding:12px 22px;font-size:11px;letter-spacing:.04em;
+  color:#FFFFFF;padding:12px 22px;font-size:11px;letter-spacing:.04em;
   cursor:pointer
 }
 #doodle-clear:hover{background:var(--ink);color:var(--bg);border-color:var(--ink)}
@@ -350,7 +350,7 @@ body.home-layout footer{justify-content:center}
 
 /* Blue UI accent in light/dark mode; heading words remain monochrome. */
 html[data-theme='dark'] #work #projects .project.is-dragging .cover{
-  box-shadow:0 0 0 8px rgba(23,47,231,.23)
+  box-shadow:0 0 0 8px rgba(15,80,226,.23)
 }
 html[data-theme='dark'] #work #projects .project.is-dragging .cover::after{opacity:.16}
 .hero h1 em,.about h2 em,.contact h2 em{color:var(--ink)}
