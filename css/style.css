@@ -309,11 +309,10 @@ footer{justify-content:flex-end}
 .about-word-motion{top:17%;right:4%;font-size:clamp(32px,4.1vw,55px);rotate:6deg}
 .about-word-graphic{top:55%;left:19%;font-size:clamp(32px,4.6vw,62px);rotate:3deg}
 .about-word-branding{bottom:2%;right:6%;font-size:clamp(29px,3.6vw,48px);rotate:-5deg}
-.about-playground .about-mark{fill:none;stroke:var(--ink);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.about-playground .about-mark{fill:none;stroke:var(--ink);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
 .about-spark{width:57px;height:57px;top:36%;left:8%;rotate:-12deg}
 .about-arrow{width:90px;height:70px;top:37%;right:17%;rotate:12deg}
 .about-underline{width:115px;height:27px;bottom:8%;left:9%;rotate:-8deg}
-.about-annotation{position:absolute;top:45%;left:37%;font-size:11px;letter-spacing:.02em;color:var(--muted);font-family:'Schoolbell',cursive;rotate:-6deg}
 @media(hover:hover){
   .about-playground .about-word{transition:color .25s ease}
   .about-playground:hover .about-word{color:var(--ink)}
@@ -327,6 +326,5 @@ footer{justify-content:flex-end}
   .about-spark{width:36px;height:36px;top:35%;left:5%}
   .about-arrow{width:66px;height:52px;right:1%;top:42%}
   .about-underline{width:85px;bottom:8%;left:8%}
-  .about-annotation{left:32%;top:47%;font-size:9px}
-}
+  }
 @media(prefers-reduced-motion:reduce){.about-playground .about-piece{will-change:auto}}
