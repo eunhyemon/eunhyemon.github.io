@@ -21,8 +21,42 @@ if(grid){
   }));
   fetch('data/projects.json').then(r=>{if(!r.ok)throw Error('unavailable');return r.json()}).then(data=>{projects=data;render()}).catch(()=>grid.innerHTML='<p class="empty">프로젝트 데이터를 불러오지 못했어요.</p>');
 }
-const friend=document.querySelector('.friend');const eyes=document.querySelector('#pupils');
-if(friend&&eyes&&matchMedia('(pointer:fine) and (prefers-reduced-motion:no-preference)').matches){addEventListener('pointermove',e=>{const r=friend.getBoundingClientRect(),x=e.clientX-r.left-r.width/2,y=e.clientY-r.top-r.height/2,d=Math.hypot(x,y)||1,t=Math.min(d/200,1);eyes.style.transform=`translate(${x/d*t*9}px,${y/d*t*9}px)`},{passive:true})}
+/* Track the cursor in the SVG's own coordinates so the pupils stay inside the eyes. */
+const friend=document.querySelector('.friend');
+const eyes=document.querySelector('#pupils');
+if(friend&&eyes&&matchMedia('(pointer:fine) and (prefers-reduced-motion:no-preference)').matches){
+  const svg=friend.querySelector('svg');
+  const pupils=[...eyes.querySelectorAll('circle')];
+  const centers=pupils.map(p=>({x:Number(p.getAttribute('cx')),y:Number(p.getAttribute('cy'))}));
+  let current=centers.map(()=>({x:0,y:0}));
+  let target=centers.map(()=>({x:0,y:0}));
+  let raf=0;
+  function frame(){
+    let moving=false;
+    pupils.forEach((p,i)=>{
+      current[i].x+=(target[i].x-current[i].x)*.18;
+      current[i].y+=(target[i].y-current[i].y)*.18;
+      p.setAttribute('transform', 'translate('+current[i].x.toFixed(2)+' '+current[i].y.toFixed(2)+')');
+      if(Math.abs(target[i].x-current[i].x)+Math.abs(target[i].y-current[i].y)>.08)moving=true;
+    });
+    raf=moving?requestAnimationFrame(frame):0;
+  }
+  function schedule(){if(!raf)raf=requestAnimationFrame(frame)}
+  addEventListener('pointermove',e=>{
+    if(!svg||document.documentElement.dataset.theme==='dark')return;
+    const matrix=svg.getScreenCTM();
+    if(!matrix)return;
+    const point=new DOMPoint(e.clientX,e.clientY).matrixTransform(matrix.inverse());
+    centers.forEach((c,i)=>{
+      const dx=point.x-c.x,dy=point.y-c.y,dist=Math.hypot(dx,dy);
+      const amount=Math.min(7,dist*.065);
+      target[i].x=dist?dx/dist*amount:0;
+      target[i].y=dist?dy/dist*amount:0;
+    });
+    schedule();
+  },{passive:true});
+  addEventListener('blur',()=>{target.forEach(p=>{p.x=0;p.y=0});schedule()});
+}
 if(window.gsap&&!matchMedia('(prefers-reduced-motion: reduce)').matches){
   if(document.querySelector('.hero h1')){
     gsap.from('.hero h1',{opacity:0,y:18,duration:1.05,ease:'power2.out'});
