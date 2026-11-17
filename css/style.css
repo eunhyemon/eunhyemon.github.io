@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Schoolbell&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=DM+Serif+Display:ital@0;1&display=swap');
 :root{--bg:#f9f9f7;--ink:#181818;--soft:#ececea;--muted:#777}
 *{box-sizing:border-box}
@@ -93,7 +94,7 @@ footer{text-align:left}
 @media(max-width:750px){.hero{min-height:85svh}.hero-main{flex-wrap:nowrap}.hero h1{font-size:clamp(55px,12vw,85px)}.friend{width:115px;margin:0}.grid{gap:70px}.work{padding-top:90px}.about{padding:110px 6%}.contact{padding:120px 6%}.section-title h2{font-size:52px}}
 
 /* Schoolbell / black, white, vivid pink */
-@import url('https://fonts.googleapis.com/css2?family=Schoolbell&display=swap');
+
 :root{--bg:#fff;--ink:#111;--soft:#f5f5f5;--muted:#666;--pink:#ff2d87}
 body{background:#fff;color:#111;font-family:'Schoolbell','Apple SD Gothic Neo',sans-serif}
 header,.work,.about{background:#fff}
@@ -127,3 +128,13 @@ footer{font-size:14px}
 #close{background:#111;font-family:'Schoolbell',sans-serif;font-size:16px;font-weight:400}
 .detail h2{font-family:'Schoolbell',sans-serif;font-weight:400}
 @media(max-width:750px){.hero h1{font-size:clamp(66px,12vw,94px)}nav{font-size:13px}.section-title h2{font-size:57px}}
+
+/* Typography scale correction */
+.hero h1{font-size:clamp(42px,6vw,82px);line-height:1.18}
+.section-title h2{font-size:clamp(35px,4.2vw,55px)}
+.about h2{font-size:clamp(35px,4.4vw,58px)}
+.contact h2{font-size:clamp(40px,5.5vw,72px)}
+.hero{min-height:76svh}
+.hero-bottom p{font-size:16px}
+.meta h3{font-size:22px}
+@media(max-width:750px){.hero h1{font-size:clamp(42px,10vw,62px)}.section-title h2{font-size:clamp(34px,8vw,45px)}.about h2{font-size:clamp(34px,8vw,48px)}.contact h2{font-size:clamp(40px,10vw,60px)}}
