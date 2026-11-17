@@ -45,7 +45,7 @@ if(friend&&eyes){
   }
   function schedule(){if(!raf)raf=requestAnimationFrame(frame)}
   function shift(x,y){ // input in the pupil's native SVG units
-    target.forEach(p=>{p.x=Math.max(-7,Math.min(7,x));p.y=Math.max(-7,Math.min(7,y));});
+    target.forEach(p=>{p.x=Math.max(-10.5,Math.min(10.5,x));p.y=Math.max(-10.5,Math.min(10.5,y));});
     schedule();
   }
   function lookAt(clientX,clientY){
@@ -71,7 +71,7 @@ if(friend&&eyes){
         const dx=Math.max(-25,Math.min(25,e.gamma-origin.g));
         const dy=Math.max(-25,Math.min(25,e.beta-origin.b));
         lastTilt=Date.now();
-        shift(dx*.26-2.4,dy*.26+1.4);
+        shift(dx*.46-2.4,dy*.46+1.4);
       }
       if('DeviceOrientationEvent' in window && typeof DeviceOrientationEvent.requestPermission!=='function'){
         addEventListener('deviceorientation',orient,{passive:true});
