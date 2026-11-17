@@ -449,7 +449,7 @@ html.intro-active .site-intro{
 }
 .home-layout .hero h1{
   position:fixed;left:50%;
-  top:calc(50% - (var(--home-eye-width) * 260 / 300 / 2) - 42px);
+  top:calc(50% - (var(--home-eye-width) * 260 / 300 / 2) - 62px);
   translate:-50% -100%;width:max-content;max-width:94vw;
   z-index:1;
 }
