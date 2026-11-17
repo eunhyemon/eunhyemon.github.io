@@ -2,7 +2,7 @@
 @font-face{font-family:'LineSeed';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Th.woff2') format('woff2');font-weight:100;font-display:swap}
 @font-face{font-family:'LineSeed';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Rg.woff2') format('woff2');font-weight:400;font-display:swap}
 @font-face{font-family:'LineSeed';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');font-weight:700;font-display:swap}
-:root{--ink:#111;--accent:#B7FF38;--bg:#fff}
+:root{--ink:#1B1A17;--accent:#B7FF38;--bg:#F6F4EE}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:'LineSeed','Apple SD Gothic Neo',sans-serif;font-weight:400;-webkit-font-smoothing:antialiased}
@@ -65,8 +65,8 @@ dialog::backdrop{background:#111b}
 @media(prefers-reduced-motion:reduce){.meta{transition:none}}
 
 /* Smooth theme switch with neon green accent. */
-:root{color-scheme:light;--surface:#fff;--soft:#f5f5f5;--muted:#777;--overlay:rgba(255,255,255,.92);--dialog-backdrop:#111b}
-html[data-theme='dark']{color-scheme:dark;--bg:#151515;--ink:#f3f3f1;--surface:#202020;--soft:#292929;--muted:#aaa;--overlay:rgba(22,22,22,.94);--dialog-backdrop:#000c}
+:root{color-scheme:light;--surface:#F6F4EE;--soft:#ECE8DF;--muted:#6E6A63;--overlay:rgba(246,244,238,.94);--dialog-backdrop:#111b}
+html[data-theme='dark']{color-scheme:dark;--bg:#171A1F;--ink:#F3EFE6;--surface:#171A1F;--soft:#22262D;--muted:#B8B2A8;--overlay:rgba(23,26,31,.94);--dialog-backdrop:#000c}
 body{background:var(--bg);color:var(--ink)}
 .theme-toggle{display:inline-flex;align-items:center;justify-content:center;min-width:42px;min-height:36px;border:1px solid currentColor;border-radius:100px;background:transparent;color:var(--ink);font-family:'LineSeed',sans-serif;font-size:12px;line-height:1;white-space:nowrap}
 .theme-toggle:hover{color:var(--accent);border-color:var(--accent)}
@@ -117,3 +117,20 @@ dialog::backdrop{background:var(--dialog-backdrop)}
 .project-pager a:last-child{text-align:right}
 .project-pager span{font-family:'Schoolbell',cursive;font-size:24px;overflow-wrap:anywhere}
 @media(max-width:750px){.project-page{padding:24px 6% 75px}.back-to-work{margin-bottom:36px}.project-heading{margin-bottom:42px}.project-gallery{gap:22px}.project-pager{margin-top:60px}.project-pager span{font-size:19px}}
+
+/* Soft ink-and-paper palette. Keep earlier layout and hover behavior unchanged. */
+html{background:var(--bg)}
+.meta p,.meta time,#count,.filters button,.note,footer,.empty{color:var(--muted)}
+.cover,.project-media img,.project-media video{background:var(--soft)}
+/* Hand-cut sun and crescent, based on the supplied reference image. */
+.theme-toggle{flex:0 0 auto;position:relative;display:inline-flex;align-items:center;justify-content:center;width:76px;min-width:76px;height:38px;min-height:38px;padding:0;border:0;border-radius:999px;background:#2159C3;color:inherit;line-height:1;box-shadow:none;cursor:pointer}
+.theme-toggle:hover,.theme-toggle:focus-visible{background:#2159C3;border:0;color:inherit}
+.theme-toggle svg{display:block;width:68px;height:30px;overflow:visible}
+.theme-toggle .sun-shape{fill:#FFDE27;transform-origin:19px 15px}
+.theme-toggle .moon-shape{fill:#F3EFE6;transform-origin:50px 15px}
+html[data-theme='dark'] .theme-toggle{background:#1949A9}
+html[data-theme='dark'] .theme-toggle:hover{background:#1949A9}
+html[data-theme='dark'] .theme-toggle .sun-shape{opacity:.7;transform:scale(.87)}
+html:not([data-theme='dark']) .theme-toggle .moon-shape{opacity:.72;transform:scale(.87)}
+@media(prefers-reduced-motion:no-preference){html.theme-ready .theme-toggle .sun-shape,html.theme-ready .theme-toggle .moon-shape{transition:transform .48s ease,opacity .48s ease}}
+@media(max-width:750px){.theme-toggle{width:66px;min-width:66px;height:34px;min-height:34px}.theme-toggle svg{width:60px;height:27px}}
