@@ -117,7 +117,6 @@ if(window.gsap&&!matchMedia('(prefers-reduced-motion: reduce)').matches){
     gsap.from('.hero-bottom',{opacity:0,y:14,duration:1,delay:.4,ease:'power2.out'});
   }
   gsap.to('.float-title',{y:-7,rotation:.35,duration:3.4,ease:'sine.inOut',repeat:-1,yoyo:true});
-  gsap.to('.friend',{y:-6,duration:3.8,ease:'sine.inOut',repeat:-1,yoyo:true});
 }
 /* Small stagger for About / Contact; classes are applied only when motion is allowed. */
 if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
