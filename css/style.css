@@ -552,7 +552,7 @@ html.theme-ready #doodle-clear{transition:none}
 #eye-tilt-permission span{translate:5px -2px;rotate:3deg}
 @media(hover:hover) and (pointer:fine){
   #doodle-clear:hover{rotate:-4deg;color:var(--accent);background:transparent}
-  #doodle-clear:hover .scribble-ring .scribble-outline{fill:var(--ink)}
+  #doodle-clear:hover .scribble-ring .scribble-outline{fill:var(--accent)}
 }
 #eye-tilt-permission:not(:disabled):active{color:var(--accent)}
 #eye-tilt-permission:disabled{opacity:.65;cursor:default}
