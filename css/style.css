@@ -85,3 +85,35 @@ dialog::backdrop{background:var(--dialog-backdrop)}
 
 /* Animate only palette changes; respect reduced-motion preferences. */
 @media(prefers-reduced-motion:no-preference){html.theme-ready body,html.theme-ready header,html.theme-ready footer,html.theme-ready .theme-toggle,html.theme-ready nav a,html.theme-ready h1 em,html.theme-ready h2 em,html.theme-ready .meta,html.theme-ready .cover,html.theme-ready .filters button,html.theme-ready .project,html.theme-ready dialog,html.theme-ready .note,html.theme-ready #count{transition-property:background-color,color,border-color;transition-duration:.48s;transition-timing-function:ease-in-out}html.theme-ready .meta{transition:opacity .22s ease,transform .22s ease,visibility .22s ease,background-color .48s ease-in-out,color .48s ease-in-out}html.theme-ready .cover img{transition:transform .4s ease}}
+
+/* Motion previews: optional MP4/WebM; GIF previews work as regular images. */
+.cover{position:relative}
+.cover .preview-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;pointer-events:none}
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+.project:hover .cover .preview-video,.project:focus-visible .cover .preview-video{opacity:1}
+.cover .preview-video{transition:opacity .2s ease}
+}
+/* Long-form portfolio detail page. */
+.project-page{max-width:1080px;margin:0 auto;padding:48px 6% 115px}
+.back-to-work{display:inline-block;font-size:12px;letter-spacing:.06em;padding:10px 0;margin-bottom:50px}
+.back-to-work:hover,.project-pager a:hover{color:var(--accent)}
+.project-heading{text-align:center;max-width:720px;margin:0 auto 65px}
+.project-heading small{color:var(--muted);letter-spacing:.05em}
+.project-heading h1{font-family:'Schoolbell',cursive;font-weight:400;font-size:clamp(42px,6vw,78px);line-height:1.15;margin:20px 0 24px;overflow-wrap:anywhere}
+.project-summary{font-size:15px;line-height:1.9;max-width:600px;margin:0 auto 27px;word-break:keep-all}
+.project-facts{display:flex;gap:20px;justify-content:center;align-items:baseline;font-size:12px}
+.project-facts span{color:var(--muted);font-size:10px;letter-spacing:.07em}
+.project-facts strong{font-weight:400}
+.project-gallery{display:flex;flex-direction:column;gap:35px}
+.project-media{margin:0}
+.project-media img,.project-media video{display:block;width:100%;height:auto;background:var(--soft)}
+.project-media figcaption{text-align:center;font-size:12px;color:var(--muted);margin-top:12px;line-height:1.6}
+.project-embed{position:relative;width:100%;aspect-ratio:16/9;background:var(--soft)}
+.project-embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.project-external{text-align:center;margin:22px 0}
+.project-external a{text-decoration:underline;text-underline-offset:4px}
+.project-pager{border-top:1px solid var(--muted);margin-top:90px;padding-top:25px;display:flex;justify-content:space-between;gap:30px;font-size:12px}
+.project-pager a{max-width:48%;display:flex;flex-direction:column;gap:9px}
+.project-pager a:last-child{text-align:right}
+.project-pager span{font-family:'Schoolbell',cursive;font-size:24px;overflow-wrap:anywhere}
+@media(max-width:750px){.project-page{padding:24px 6% 75px}.back-to-work{margin-bottom:36px}.project-heading{margin-bottom:42px}.project-gallery{gap:22px}.project-pager{margin-top:60px}.project-pager span{font-size:19px}}
