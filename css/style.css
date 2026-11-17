@@ -399,7 +399,7 @@ header nav a,footer a,.project-external a{display:inline-block}
 
 /* Hand-drawn, slightly tilted clear button. Keep its centered positioning. */
 #doodle-clear{rotate:-4deg;transition:rotate .22s ease,background-color .22s ease,color .22s ease}
-@media(hover:hover) and (pointer:fine){#doodle-clear:hover{rotate:1deg}}
+/* Hover changes the fill only; the -4deg tilt stays fixed. */
 /* iOS needs a direct tap to grant phone orientation access. */
 #eye-tilt-permission[hidden]{display:none}
 #eye-tilt-permission{
