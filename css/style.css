@@ -122,15 +122,18 @@ dialog::backdrop{background:var(--dialog-backdrop)}
 html{background:var(--bg)}
 .meta p,.meta time,#count,.filters button,.note,footer,.empty{color:var(--muted)}
 .cover,.project-media img,.project-media video{background:var(--soft)}
-/* Hand-cut sun and crescent, based on the supplied reference image. */
-.theme-toggle{flex:0 0 auto;position:relative;display:inline-flex;align-items:center;justify-content:center;width:76px;min-width:76px;height:38px;min-height:38px;padding:0;border:0;border-radius:999px;background:#2159C3;color:inherit;line-height:1;box-shadow:none;cursor:pointer}
-.theme-toggle:hover,.theme-toggle:focus-visible{background:#2159C3;border:0;color:inherit}
+/* No capsule: hand-cut sun sets while the crescent rises. */
+.theme-toggle{flex:0 0 auto;position:relative;display:inline-flex;align-items:center;justify-content:center;width:68px;min-width:68px;height:38px;min-height:38px;padding:0;border:0;border-radius:0;background:transparent;color:var(--ink);line-height:1;box-shadow:none;cursor:pointer;overflow:hidden}
+.theme-toggle:hover,.theme-toggle:focus-visible,html[data-theme='dark'] .theme-toggle,html[data-theme='dark'] .theme-toggle:hover{background:transparent;border:0;color:var(--ink)}
 .theme-toggle svg{display:block;width:68px;height:30px;overflow:visible}
-.theme-toggle .sun-shape{fill:#FFDE27;transform-origin:19px 15px}
-.theme-toggle .moon-shape{fill:#F3EFE6;transform-origin:50px 15px}
-html[data-theme='dark'] .theme-toggle{background:#1949A9}
-html[data-theme='dark'] .theme-toggle:hover{background:#1949A9}
-html[data-theme='dark'] .theme-toggle .sun-shape{opacity:.7;transform:scale(.87)}
-html:not([data-theme='dark']) .theme-toggle .moon-shape{opacity:.72;transform:scale(.87)}
-@media(prefers-reduced-motion:no-preference){html.theme-ready .theme-toggle .sun-shape,html.theme-ready .theme-toggle .moon-shape{transition:transform .48s ease,opacity .48s ease}}
-@media(max-width:750px){.theme-toggle{width:66px;min-width:66px;height:34px;min-height:34px}.theme-toggle svg{width:60px;height:27px}}
+.theme-toggle .sun-shape{fill:#F4C900;transform-box:view-box;transform-origin:19px 15px;transform:translateY(0) rotate(0deg);opacity:1}
+.theme-toggle .moon-shape{fill:var(--ink);transform-box:view-box;transform-origin:50px 15px;transform:translateY(24px) rotate(-24deg) scale(.82);opacity:0}
+html[data-theme='dark'] .theme-toggle .sun-shape{transform:translateY(24px) rotate(30deg) scale(.78);opacity:0}
+html[data-theme='dark'] .theme-toggle .moon-shape{transform:translateY(0) rotate(0deg) scale(1);opacity:1}
+@media(prefers-reduced-motion:no-preference){html.theme-ready .theme-toggle .sun-shape,html.theme-ready .theme-toggle .moon-shape{transition:transform .55s cubic-bezier(.22,.7,.25,1),opacity .38s ease,fill .48s ease}}
+@media(max-width:750px){.theme-toggle{width:56px;min-width:56px;height:34px;min-height:34px}.theme-toggle svg{width:60px;height:27px}}
+/* Dark-only scribbled closed eyes; daylight keeps the moving pupils. */
+.friend .eyes-shut{display:none}
+html[data-theme='dark'] .friend .eyes-open{display:none}
+html[data-theme='dark'] .friend .eyes-shut{display:inline}
+.friend .eyes-shut path{fill:none;stroke:var(--ink);stroke-width:5.8;stroke-linecap:round;stroke-linejoin:round}
