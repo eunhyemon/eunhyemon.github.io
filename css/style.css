@@ -178,3 +178,15 @@ html[data-theme='dark'] .friend .eyes-shut{display:inline}
   #work #projects .project .meta{padding:10px 3px 0}
   #work #projects .project .meta h3{font-size:12px}
 }
+
+/* Work board drag feedback in the site accent, not the browser's blue. */
+#work #projects .project.is-dragging .cover{
+  outline:2px solid var(--accent);
+  outline-offset:5px;
+  box-shadow:0 0 0 8px rgba(183,255,56,.18);
+}
+#work #projects .project.is-dragging .meta h3{color:var(--accent)}
+#work #projects .project::selection,#work #projects .project *::selection{
+  background:var(--accent);color:#1B1A17
+}
+#work #projects .project{-webkit-tap-highlight-color:transparent}
