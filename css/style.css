@@ -228,3 +228,13 @@ html[data-theme='dark'] .friend .eyes-shut{display:inline}
   #work #projects .project.is-dragging .cover,
   #work #projects .project.is-dragging .meta{transition-delay:0ms}
 }
+
+/* Soft scroll-in motion on the long-form work detail page. */
+@media(prefers-reduced-motion:no-preference){
+  .project-page .detail-reveal{opacity:0;translate:0 22px}
+  .project-page .detail-reveal.detail-in{
+    opacity:1;translate:0 0;
+    transition:opacity .9s cubic-bezier(.18,.75,.24,1),translate 1.05s cubic-bezier(.18,.75,.24,1);
+    transition-delay:var(--detail-delay,0ms)
+  }
+}
