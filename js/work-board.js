@@ -101,6 +101,30 @@
     card.addEventListener('pointercancel',end);
     try{card.setPointerCapture(event.pointerId)}catch(_){}
   });
+  /* Cursor-following DRAG! label over draggable cards only. */
+  if (desktop.matches && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const hint=document.createElement('span');
+    hint.id='work-drag-hint';
+    hint.textContent='DRAG!';
+    hint.setAttribute('aria-hidden','true');
+    document.body.appendChild(hint);
+    const setVisible=(e)=>{
+      const card=e.target.closest?.('.project');
+      const visible=!!card && board.contains(card);
+      hint.classList.toggle('is-visible',visible);
+      if(visible){
+        hint.style.left=Math.min(e.clientX,innerWidth-85)+'px';
+        hint.style.top=Math.min(e.clientY,innerHeight-45)+'px';
+      }
+    };
+    board.addEventListener('pointermove',setVisible,{passive:true});
+    board.addEventListener('pointerover',setVisible,{passive:true});
+    board.addEventListener('pointerout',e=>{
+      if(!e.relatedTarget || !e.relatedTarget.closest?.('.project')) hint.classList.remove('is-visible');
+    });
+    board.addEventListener('pointerleave',()=>hint.classList.remove('is-visible'));
+    addEventListener('blur',()=>hint.classList.remove('is-visible'));
+  }
   board.addEventListener('work:rendered', layout);
   addEventListener('resize', () => { if (desktop.matches) layout(); });
   layout();
