@@ -586,11 +586,3 @@ html.theme-ready #doodle-clear{transition:none}
   .project-external a:hover::after,.project-external a:focus-visible::after{opacity:1}
 }
 
-/* Lightweight hand-sketched desktop pointer. Preserve native affordances for actions. */
-@media (hover:hover) and (pointer:fine){
-  html,body{cursor:url('../images/scribble-cursor.svg') 3 3,auto}
-  a,button,[role="button"],input,select,textarea{cursor:pointer}
-  #work #projects .project{cursor:grab}
-  #work #projects .project.is-dragging{cursor:grabbing}
-  #doodle-canvas{cursor:url('../images/scribble-cursor.svg') 3 3,crosshair}
-}
