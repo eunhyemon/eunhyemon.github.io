@@ -305,10 +305,10 @@ footer{justify-content:flex-end}
   font-family:'Schoolbell',cursive;font-weight:400;line-height:1;
   white-space:nowrap;color:var(--ink);
 }
-.about-word-youtube{top:11%;left:4%;font-size:clamp(35px,5vw,66px);rotate:-6deg}
-.about-word-motion{top:17%;right:4%;font-size:clamp(32px,4.1vw,55px);rotate:6deg}
-.about-word-graphic{top:55%;left:19%;font-size:clamp(32px,4.6vw,62px);rotate:3deg}
-.about-word-branding{bottom:2%;right:6%;font-size:clamp(29px,3.6vw,48px);rotate:-5deg}
+.about-word-youtube{top:11%;left:4%;font-size:clamp(25px,3vw,36px);rotate:-6deg}
+.about-word-motion{top:17%;right:4%;font-size:clamp(24px,2.7vw,33px);rotate:6deg}
+.about-word-graphic{top:55%;left:19%;font-size:clamp(25px,3vw,36px);rotate:3deg}
+.about-word-branding{bottom:2%;right:6%;font-size:clamp(23px,2.6vw,31px);rotate:-5deg}
 .about-playground .about-mark{fill:none;stroke:var(--ink);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
 .about-spark{width:57px;height:57px;top:36%;left:8%;rotate:-12deg}
 .about-arrow{width:90px;height:70px;top:37%;right:17%;rotate:12deg}
@@ -319,12 +319,19 @@ footer{justify-content:flex-end}
 }
 @media(max-width:600px){
   .about>.about-playground{height:310px;margin-top:46px}
-  .about-word-youtube{top:8%;left:0;font-size:36px}
-  .about-word-motion{top:23%;right:0;font-size:34px}
-  .about-word-graphic{top:56%;left:4%;font-size:37px}
-  .about-word-branding{bottom:3%;right:0;font-size:30px}
+  .about-word-youtube{top:8%;left:0;font-size:27px}
+  .about-word-motion{top:23%;right:0;font-size:25px}
+  .about-word-graphic{top:56%;left:4%;font-size:28px}
+  .about-word-branding{bottom:3%;right:0;font-size:24px}
   .about-spark{width:36px;height:36px;top:35%;left:5%}
   .about-arrow{width:66px;height:52px;right:1%;top:42%}
   .about-underline{width:85px;bottom:8%;left:8%}
   }
 @media(prefers-reduced-motion:reduce){.about-playground .about-piece{will-change:auto}}
+
+/* Subtle cursor hint for the home drawing layer. */
+#doodle-hint{position:absolute;z-index:4;top:0;left:0;opacity:0;pointer-events:none;white-space:nowrap;
+  color:var(--ink);font-family:'Schoolbell',cursive;font-size:15px;line-height:1;
+  transform:translate(16px,18px) rotate(-7deg);transition:opacity .16s ease;}
+#doodle-hint.is-visible{opacity:1}
+@media(pointer:coarse){#doodle-hint{display:none}}
