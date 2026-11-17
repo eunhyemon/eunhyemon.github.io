@@ -592,5 +592,5 @@ html.theme-ready #doodle-clear{transition:none}
   a,button,[role="button"],input,select,textarea{cursor:pointer}
   #work #projects .project{cursor:grab}
   #work #projects .project.is-dragging{cursor:grabbing}
-  #doodle-canvas{cursor:crosshair}
+  #doodle-canvas{cursor:url('../images/scribble-cursor.svg') 3 3,crosshair}
 }
