@@ -137,3 +137,21 @@ html[data-theme='dark'] .theme-toggle .moon-shape{transform:translate(-16px,0) r
 html[data-theme='dark'] .friend .eyes-open{display:none}
 html[data-theme='dark'] .friend .eyes-shut{display:inline}
 .friend .eyes-shut path{fill:none;stroke:var(--ink);stroke-width:5.8;stroke-linecap:round;stroke-linejoin:round}
+
+/* Work-only playful collage. Project detail remains a normal scroll page. */
+@media(min-width:801px) and (pointer:fine){
+  #work #projects.grid{display:block;position:relative;max-width:1180px;width:100%;height:var(--board-height,695px);min-height:600px;overflow:visible;margin:0 auto;padding:0;scroll-snap-type:none}
+  #work #projects .project{position:absolute;display:block;left:var(--x,0%);top:var(--y,0px);width:var(--w,30%);min-width:0;transform:rotate(var(--rotation,0deg));text-align:center;touch-action:none;cursor:grab;user-select:none;-webkit-user-select:none;will-change:left,top}
+  #work #projects .project.is-dragging{cursor:grabbing}
+  #work #projects .project .cover{box-shadow:0 7px 20px rgba(0,0,0,.065);filter:none}
+  #work #projects .project .cover img{pointer-events:none;user-select:none;-webkit-user-drag:none}
+  #work #projects .project.is-dragging .meta{visibility:hidden;opacity:0}
+  #work #projects .project:hover .cover{box-shadow:0 11px 26px rgba(0,0,0,.10)}
+}
+@media(max-width:800px),(pointer:coarse){
+  #work #projects.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px 18px;max-width:760px;height:auto;margin:0 auto}
+  #work #projects .project{position:relative;left:auto;top:auto;width:100%;transform:none}
+  #work #projects .meta{position:static;inset:auto;opacity:1;visibility:visible;transform:none;background:transparent;padding:12px 0 0;margin:0}
+  #work #projects .meta h3{font-size:16px}
+}
+@media(max-width:520px){#work #projects.grid{grid-template-columns:1fr;max-width:470px;gap:38px}}
