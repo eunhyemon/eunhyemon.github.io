@@ -35,7 +35,7 @@ fetch('data/projects.json').then(r=>{if(!r.ok)throw Error('load');return r.json(
   const summary=p.summary?'<p class="project-summary">'+esc(p.summary)+'</p>':'';
   const channelUrl=safeUrl(p.channelUrl);
   const channelLink=/^https:\/\//i.test(channelUrl)?'<p class="project-channel"><a href="'+esc(channelUrl)+'" target="_blank" rel="noopener noreferrer" aria-label="'+esc(p.title)+' 유튜브 채널 열기">VIEW CHANNEL ↗</a></p>':'';
-  root.innerHTML='<div class="project-heading"><small>'+esc(p.category||'WORK')+' / '+esc(p.year||'')+'</small><h1>'+esc(p.title)+'</h1>'+summary+channelLink+'<div class="project-facts"><span>ROLE</span><strong>'+esc(p.role||p.category||'')+'</strong></div></div><div class="project-gallery">'+visibleGallery.map(mediaItem).join('')+(p.video?embedVideo(p.video):'')+'</div>';
+  root.innerHTML='<div class="project-heading"><small>'+esc(p.category||'WORK')+(p.projectType?' / '+esc(p.projectType):'')+(p.year?' / '+esc(p.year):'')+'</small><h1>'+esc(p.title)+'</h1>'+summary+channelLink+'<div class="project-facts"><span>ROLE</span><strong>'+esc(p.role||p.category||'')+'</strong></div></div><div class="project-gallery">'+visibleGallery.map(mediaItem).join('')+(p.video?embedVideo(p.video):'')+'</div>';
   if(!matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window){
     const elements=[...root.querySelectorAll('.project-heading,.project-media,.project-embed,.project-external')];
     const observer=new IntersectionObserver(entries=>{
