@@ -34,6 +34,17 @@ fetch('data/projects.json').then(r=>{if(!r.ok)throw Error('load');return r.json(
   const visibleGallery=gallery.length?gallery:[cover];
   const summary=p.summary?'<p class="project-summary">'+esc(p.summary)+'</p>':'';
   root.innerHTML='<div class="project-heading"><small>'+esc(p.category||'WORK')+' / '+esc(p.year||'')+'</small><h1>'+esc(p.title)+'</h1>'+summary+'<div class="project-facts"><span>ROLE</span><strong>'+esc(p.role||p.category||'')+'</strong></div></div><div class="project-gallery">'+visibleGallery.map(mediaItem).join('')+(p.video?embedVideo(p.video):'')+'</div>';
+  if(!matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window){
+    const elements=[...root.querySelectorAll('.project-heading,.project-media,.project-embed,.project-external')];
+    const observer=new IntersectionObserver(entries=>{
+      for(const entry of entries){
+        if(!entry.isIntersecting)continue;
+        entry.target.classList.add('detail-in');
+        observer.unobserve(entry.target);
+      }
+    },{threshold:.08,rootMargin:'0px 0px 35px 0px'});
+    elements.forEach((el,i)=>{el.classList.add('detail-reveal');el.style.setProperty('--detail-delay',((i%3)*95)+'ms');observer.observe(el);});
+  }
   const before=items[index-1],after=items[index+1],pager=document.getElementById('project-pager');
   pager.innerHTML=(before?'<a href="project.html?slug='+encodeURIComponent(before.slug)+'">← PREVIOUS <span>'+esc(before.title)+'</span></a>':'<span></span>')+(after?'<a href="project.html?slug='+encodeURIComponent(after.slug)+'">NEXT → <span>'+esc(after.title)+'</span></a>':'<span></span>');
 }).catch(()=>{root.innerHTML='<p class="empty">프로젝트 데이터를 불러오지 못했어요. <a href="work.html">목록으로 돌아가기 ↗</a></p>'});
