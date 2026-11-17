@@ -545,13 +545,14 @@ html.theme-ready #doodle-clear{transition:none}
   fill:none;stroke:var(--accent);stroke-width:2.8;
   stroke-linecap:round;stroke-linejoin:round;
 }
-#doodle-clear .scribble-ring path{stroke-width:3.5}
+.scribble-ring .scribble-fill{fill:transparent;stroke:none}
+#doodle-clear .scribble-ring .scribble-outline{stroke-width:3.5}
 #doodle-clear span,#eye-tilt-permission span{
   position:relative;z-index:1;white-space:nowrap;pointer-events:none;
 }
 @media(hover:hover) and (pointer:fine){
   #doodle-clear:hover{rotate:-4deg;color:#fff;background:transparent}
-  #doodle-clear:hover .scribble-ring path{fill:var(--accent)}
+  #doodle-clear:hover .scribble-ring .scribble-fill{fill:var(--accent)}
 }
 #eye-tilt-permission:not(:disabled):active{color:var(--accent)}
 #eye-tilt-permission:disabled{opacity:.65;cursor:default}
