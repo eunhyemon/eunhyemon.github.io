@@ -248,3 +248,22 @@ html[data-theme='dark'] .friend .eyes-shut{display:inline}
     transition-delay:var(--page-delay,0ms)
   }
 }
+
+/* Visible lime highlight while physically dragging (not merely hovering).
+   Disable the native blue text/drag selection on work cards. */
+#work #projects .project,
+#work #projects .project *{user-select:none;-webkit-user-select:none;-webkit-user-drag:none}
+#work #projects .project .cover{position:relative;isolation:isolate}
+#work #projects .project .cover::after{
+  content:"";position:absolute;inset:0;z-index:2;
+  background:var(--accent);opacity:0;pointer-events:none;
+  transition:opacity .18s ease
+}
+#work #projects .project.is-dragging .cover{
+  outline:3px solid var(--accent);outline-offset:5px;
+  box-shadow:0 0 0 8px rgba(183,255,56,.24)
+}
+#work #projects .project.is-dragging .cover::after{opacity:.25}
+#work #projects .project.is-dragging .meta h3{color:var(--accent)}
+/* Keep the bottom back-navigation but remove its empty copyright column. */
+footer{justify-content:flex-end}
