@@ -12,6 +12,7 @@ if(grid){
       const media=motion?`<video class="preview-video" src="${esc(preview)}" poster="${esc(p.thumbnail)}" muted loop playsinline preload="none" aria-hidden="true"></video>`:'';
       return `<a class="project" href="project.html?slug=${encodeURIComponent(p.slug)}" aria-label="${esc(p.title)} 상세 보기"><span class="cover"><img src="${esc(pic)}" alt="" loading="lazy">${media}</span><span class="meta"><span><h3>${esc(p.title)}</h3><p>${esc(p.category)}</p></span><time>${esc(p.year)}</time></span></a>`;
     }).join(''):'<p class="empty">프로젝트가 아직 없어요.</p>';
+    grid.dispatchEvent(new CustomEvent('work:rendered'));
     if(window.ScrollTrigger)ScrollTrigger.refresh();
   }
   document.querySelectorAll('.filters button').forEach(b=>b.addEventListener('click',()=>{
