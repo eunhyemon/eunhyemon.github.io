@@ -12,6 +12,15 @@
     "video": "images/etume-motion.mp4"
   },
   {
+    "slug": "jenny-park",
+    "title": "Jenny Park",
+    "category": "Motion",
+    "thumbnail": "images/jenny-01-thumbs.png",
+    "images": [
+      "images/jenny-01-motion.gif"
+    ]
+  },
+  {
     "slug": "moving-type",
     "title": "Type in Motion",
     "category": "Motion",
