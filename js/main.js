@@ -21,32 +21,38 @@ if(grid){
   }));
   fetch('data/projects.json').then(r=>{if(!r.ok)throw Error('unavailable');return r.json()}).then(data=>{projects=data;render()}).catch(()=>grid.innerHTML='<p class="empty">프로젝트 데이터를 불러오지 못했어요.</p>');
 }
-/* Track the cursor in the SVG's own coordinates so the pupils stay inside the eyes. */
+/* Smooth eye tracking: mouse on desktop, orientation or touch on phones. */
 const friend=document.querySelector('.friend');
 const eyes=document.querySelector('#pupils');
-if(friend&&eyes&&matchMedia('(pointer:fine) and (prefers-reduced-motion:no-preference)').matches){
+if(friend&&eyes){
   const svg=friend.querySelector('svg');
   const pupils=[...eyes.querySelectorAll('circle')];
   const centers=pupils.map(p=>({x:Number(p.getAttribute('cx')),y:Number(p.getAttribute('cy'))}));
-  let current=centers.map(()=>({x:0,y:0}));
-  let target=centers.map(()=>({x:0,y:0}));
+  const coarse=matchMedia('(pointer:coarse)').matches;
+  const reduced=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  const current=centers.map(()=>({x:0,y:0}));
+  const target=centers.map(()=>({x:coarse?-2.4:0,y:coarse?1.4:0}));
   let raf=0;
   function frame(){
     let moving=false;
     pupils.forEach((p,i)=>{
       current[i].x+=(target[i].x-current[i].x)*.18;
       current[i].y+=(target[i].y-current[i].y)*.18;
-      p.setAttribute('transform', 'translate('+current[i].x.toFixed(2)+' '+current[i].y.toFixed(2)+')');
+      p.setAttribute('transform','translate('+current[i].x.toFixed(2)+' '+current[i].y.toFixed(2)+')');
       if(Math.abs(target[i].x-current[i].x)+Math.abs(target[i].y-current[i].y)>.08)moving=true;
     });
     raf=moving?requestAnimationFrame(frame):0;
   }
   function schedule(){if(!raf)raf=requestAnimationFrame(frame)}
-  addEventListener('pointermove',e=>{
+  function shift(x,y){ // input in the pupil's native SVG units
+    target.forEach(p=>{p.x=Math.max(-7,Math.min(7,x));p.y=Math.max(-7,Math.min(7,y));});
+    schedule();
+  }
+  function lookAt(clientX,clientY){
     if(!svg||document.documentElement.dataset.theme==='dark')return;
     const matrix=svg.getScreenCTM();
     if(!matrix)return;
-    const point=new DOMPoint(e.clientX,e.clientY).matrixTransform(matrix.inverse());
+    const point=new DOMPoint(clientX,clientY).matrixTransform(matrix.inverse());
     centers.forEach((c,i)=>{
       const dx=point.x-c.x,dy=point.y-c.y,dist=Math.hypot(dx,dy);
       const amount=Math.min(7,dist*.065);
@@ -54,8 +60,55 @@ if(friend&&eyes&&matchMedia('(pointer:fine) and (prefers-reduced-motion:no-prefe
       target[i].y=dist?dy/dist*amount:0;
     });
     schedule();
-  },{passive:true});
-  addEventListener('blur',()=>{target.forEach(p=>{p.x=0;p.y=0});schedule()});
+  }
+  if(!reduced){
+    if(coarse){
+      let origin=null;
+      let lastTilt=0;
+      function orient(e){
+        if(!Number.isFinite(e.gamma)||!Number.isFinite(e.beta))return;
+        if(!origin)origin={g:e.gamma,b:e.beta};
+        const dx=Math.max(-25,Math.min(25,e.gamma-origin.g));
+        const dy=Math.max(-25,Math.min(25,e.beta-origin.b));
+        lastTilt=Date.now();
+        shift(dx*.26-2.4,dy*.26+1.4);
+      }
+      if('DeviceOrientationEvent' in window && typeof DeviceOrientationEvent.requestPermission!=='function'){
+        addEventListener('deviceorientation',orient,{passive:true});
+      }
+      const permissionButton=document.getElementById('eye-tilt-permission');
+      if(permissionButton){
+        if('DeviceOrientationEvent' in window && typeof DeviceOrientationEvent.requestPermission==='function'){
+          permissionButton.hidden=false;
+          permissionButton.addEventListener('click',async()=>{
+            try{
+              const result=await DeviceOrientationEvent.requestPermission();
+              if(result==='granted'){
+                addEventListener('deviceorientation',orient,{passive:true});
+                permissionButton.hidden=true;
+              }else{
+                permissionButton.textContent='TOUCH TO LOOK';
+                permissionButton.disabled=true;
+              }
+            }catch(err){
+              permissionButton.textContent='TOUCH TO LOOK';
+              permissionButton.disabled=true;
+            }
+          });
+        }
+      }
+      // Touch always works, including browsers without motion sensors.
+      const touchLook=e=>{if(Date.now()-lastTilt<900)return;lookAt(e.touches[0].clientX,e.touches[0].clientY)};
+      addEventListener('touchstart',touchLook,{passive:true});
+      addEventListener('touchmove',touchLook,{passive:true});
+      schedule(); // keep the resting eyes slightly off center
+    }else{
+      addEventListener('pointermove',e=>lookAt(e.clientX,e.clientY),{passive:true});
+      addEventListener('blur',()=>shift(0,0));
+    }
+  }else if(coarse){
+    shift(-2.4,1.4);
+  }
 }
 if(window.gsap&&!matchMedia('(prefers-reduced-motion: reduce)').matches){
   if(document.querySelector('.hero h1')){
