@@ -1,11 +1,37 @@
-const grid=document.querySelector('#projects');const dlg=document.querySelector('#detail');const out=document.querySelector('#detail-content');let projects=[];
+const grid=document.querySelector('#projects');let projects=[];
 const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 if(grid){
-function render(cat='All'){const list=projects.filter(p=>cat==='All'||p.category===cat);const count=document.querySelector('#count');if(count)count.textContent=String(list.length).padStart(2,'0')+' PROJECTS';grid.innerHTML=list.length?list.map(p=>`<button class="project" data-slug="${esc(p.slug)}"><span class="cover"><img src="${esc(p.thumbnail)}" alt="${esc(p.title)} 썸네일" loading="lazy"></span><span class="meta"><span><h3>${esc(p.title)}</h3><p>${esc(p.category)}</p></span><time>${esc(p.year)}</time></span></button>`).join(''):'<p class="empty">프로젝트가 아직 없어요.</p>';if(window.ScrollTrigger)ScrollTrigger.refresh()}
-document.querySelectorAll('.filters button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.filters button').forEach(x=>x.classList.remove('active'));b.classList.add('active');render(b.dataset.filter)}));
-grid.addEventListener('click',e=>{const b=e.target.closest('[data-slug]');if(!b)return;const p=projects.find(x=>x.slug===b.dataset.slug);if(!p)return;const video=p.video&&/^https:\/\/(www\.)?(vimeo\.com|youtube\.com|youtu\.be)\//.test(p.video)?`<a target="_blank" rel="noopener noreferrer" href="${esc(p.video)}">WATCH VIDEO ↗</a>`:'';out.innerHTML=`<div class="detail"><img src="${esc(p.image||p.thumbnail)}" alt="${esc(p.title)}"><small>${esc(p.category)} / ${esc(p.year)}</small><h2>${esc(p.title)}</h2><p>${esc(p.summary)}</p><small>ROLE — ${esc(p.role)}</small>${video}</div>`;dlg.showModal()});
-document.querySelector('#close').addEventListener('click',()=>dlg.close());dlg.addEventListener('click',e=>{if(e.target===dlg)dlg.close()});
-fetch('data/projects.json').then(r=>{if(!r.ok)throw Error('unavailable');return r.json()}).then(data=>{projects=data;render()}).catch(()=>grid.innerHTML='<p class="empty">프로젝트 데이터를 불러오지 못했어요.</p>');
+  function render(cat='All'){
+    const list=projects.filter(p=>cat==='All'||p.category===cat);
+    const count=document.querySelector('#count');
+    if(count)count.textContent=String(list.length).padStart(2,'0')+' PROJECTS';
+    grid.innerHTML=list.length?list.map(p=>{
+      const preview=typeof p.preview==='string'?p.preview:'';
+      const motion=/\.(mp4|webm)(?:[?#]|$)/i.test(preview);
+      const pic=motion?p.thumbnail:(preview||p.thumbnail);
+      const media=motion?`<video class="preview-video" src="${esc(preview)}" poster="${esc(p.thumbnail)}" muted loop playsinline preload="none" aria-hidden="true"></video>`:'';
+      return `<a class="project" href="project.html?slug=${encodeURIComponent(p.slug)}" aria-label="${esc(p.title)} 상세 보기"><span class="cover"><img src="${esc(pic)}" alt="" loading="lazy">${media}</span><span class="meta"><span><h3>${esc(p.title)}</h3><p>${esc(p.category)}</p></span><time>${esc(p.year)}</time></span></a>`;
+    }).join(''):'<p class="empty">프로젝트가 아직 없어요.</p>';
+    if(window.ScrollTrigger)ScrollTrigger.refresh();
+  }
+  document.querySelectorAll('.filters button').forEach(b=>b.addEventListener('click',()=>{
+    document.querySelectorAll('.filters button').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');render(b.dataset.filter);
+  }));
+  const mayAnimate=matchMedia('(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference)').matches;
+  if(mayAnimate){
+    grid.addEventListener('pointerover',e=>{
+      const card=e.target.closest('.project');if(!card||!grid.contains(card))return;
+      const vid=card.querySelector('.preview-video');if(!vid||e.relatedTarget&&card.contains(e.relatedTarget))return;
+      vid.play().catch(()=>{});
+    });
+    grid.addEventListener('pointerout',e=>{
+      const card=e.target.closest('.project');if(!card||!grid.contains(card))return;
+      const vid=card.querySelector('.preview-video');if(!vid||e.relatedTarget&&card.contains(e.relatedTarget))return;
+      vid.pause();vid.currentTime=0;
+    });
+  }
+  fetch('data/projects.json').then(r=>{if(!r.ok)throw Error('unavailable');return r.json()}).then(data=>{projects=data;render()}).catch(()=>grid.innerHTML='<p class="empty">프로젝트 데이터를 불러오지 못했어요.</p>');
 }
 const friend=document.querySelector('.friend');const eyes=document.querySelector('#pupils');
 if(friend&&eyes&&matchMedia('(pointer:fine) and (prefers-reduced-motion:no-preference)').matches){addEventListener('pointermove',e=>{const r=friend.getBoundingClientRect(),x=e.clientX-r.left-r.width/2,y=e.clientY-r.top-r.height/2,d=Math.hypot(x,y)||1,t=Math.min(d/200,1);eyes.style.transform=`translate(${x/d*t*9}px,${y/d*t*9}px)`},{passive:true})}
