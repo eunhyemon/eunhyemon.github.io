@@ -277,8 +277,9 @@ footer{justify-content:flex-end}
 .hero-main,.hero-bottom{position:relative;z-index:1;pointer-events:none}
 #doodle-clear{
   position:absolute;left:50%;bottom:40px;transform:translateX(-50%);z-index:3;
-  border:1px solid var(--accent);border-radius:999px;background:var(--accent);
-  color:#111111;padding:9px 18px;font-size:11px;letter-spacing:.04em;
+  border:0;border-radius:0;background:var(--accent);
+  clip-path:polygon(5% 8%,13% 4%,23% 8%,34% 2%,47% 6%,57% 3%,69% 7%,82% 2%,94% 10%,99% 25%,97% 39%,100% 55%,95% 76%,89% 94%,76% 97%,63% 93%,49% 99%,36% 95%,23% 98%,12% 91%,4% 94%,1% 75%,3% 59%,0% 44%,3% 25%);
+  color:#111111;padding:12px 22px;font-size:11px;letter-spacing:.04em;
   cursor:pointer
 }
 #doodle-clear:hover{background:var(--ink);color:var(--bg);border-color:var(--ink)}
@@ -338,3 +339,11 @@ footer{justify-content:flex-end}
 
 /* Center the two home-only bottom actions without changing other pages. */
 body.home-layout footer{justify-content:center}
+
+/* Tiny floating invitation to rearrange work cards. */
+#work-drag-hint{position:fixed;top:0;left:0;z-index:100;pointer-events:none;
+  opacity:0;transform:translate(16px,18px) rotate(-9deg);color:var(--ink);
+  font:400 17px/1 'Schoolbell',cursive;white-space:nowrap;
+  transition:opacity .12s ease}
+#work-drag-hint.is-visible{opacity:1}
+@media(max-width:800px),(pointer:coarse){#work-drag-hint{display:none}}
