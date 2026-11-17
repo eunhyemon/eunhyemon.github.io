@@ -1,12 +1,15 @@
 [
   {
-    "slug": "little-identity",
-    "title": "A Little Identity",
-    "category": "Branding",
-    "year": "2026",
-    "summary": "브랜딩 샘플 프로젝트입니다. 실제 작업물로 교체해주세요.",
-    "role": "Branding · Art direction",
-    "thumbnail": "images/project-01.svg"
+    "slug": "etume",
+    "title": "에투메",
+    "category": "Motion",
+    "summary": "에투메 채널아트 및 모션 디자인 작업.",
+    "role": "Channel art · Motion design",
+    "thumbnail": "images/etume-thumb.gif",
+    "images": [
+      "images/etume-channel-art.jpg"
+    ],
+    "video": "images/etume-motion.mp4"
   },
   {
     "slug": "moving-type",
