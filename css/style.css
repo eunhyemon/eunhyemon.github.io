@@ -2,7 +2,7 @@
 @font-face{font-family:'LineSeed';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Th.woff2') format('woff2');font-weight:100;font-display:swap}
 @font-face{font-family:'LineSeed';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Rg.woff2') format('woff2');font-weight:400;font-display:swap}
 @font-face{font-family:'LineSeed';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');font-weight:700;font-display:swap}
-:root{--ink:#111111;--accent:#B7FF38;--bg:#FFFFFF}
+:root{--ink:#111111;--accent:#3668F4;--bg:#FFFFFF}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:'LineSeed','Apple SD Gothic Neo',sans-serif;font-weight:400;-webkit-font-smoothing:antialiased}
@@ -17,7 +17,7 @@ nav a:hover,footer a:hover{color:var(--accent)}
 .hero-main{display:flex;flex-direction:column;align-items:center;gap:28px;text-align:center}
 .hero h1,.hero h1 em{font-family:'Schoolbell',cursive;font-weight:400;font-style:normal}
 .hero h1{font-size:clamp(36px,4.5vw,60px);line-height:1.25;letter-spacing:-.035em;margin:0}
-h1 em,h2 em{font-style:normal;font-weight:inherit;color:var(--accent)}
+h1 em,h2 em{font-style:normal;font-weight:inherit;color:var(--ink)}
 .friend{width:clamp(125px,17vw,195px);position:relative}
 .friend svg{display:block;width:100%;height:auto;overflow:visible}
 #pupils{transition:transform .08s linear}
@@ -66,7 +66,7 @@ dialog::backdrop{background:#111b}
 
 /* Smooth theme switch with neon green accent. */
 :root{color-scheme:light;--surface:#FFFFFF;--soft:#F3F3F3;--muted:#6F6F6F;--overlay:rgba(255,255,255,.94);--dialog-backdrop:#111b}
-html[data-theme='dark']{color-scheme:dark;--bg:#111111;--ink:#F5F5F5;--surface:#111111;--soft:#1D1D1D;--muted:#A8A8A8;--overlay:rgba(17,17,17,.94);--dialog-backdrop:#000c}
+html[data-theme='dark']{color-scheme:dark;--bg:#111111;--ink:#F5F5F5;--accent:#A8C5FF;--surface:#111111;--soft:#1D1D1D;--muted:#A8A8A8;--overlay:rgba(17,17,17,.94);--dialog-backdrop:#000c}
 body{background:var(--bg);color:var(--ink)}
 .theme-toggle{display:inline-flex;align-items:center;justify-content:center;min-width:42px;min-height:36px;border:1px solid currentColor;border-radius:100px;background:transparent;color:var(--ink);font-family:'LineSeed',sans-serif;font-size:12px;line-height:1;white-space:nowrap}
 .theme-toggle:hover{color:var(--accent);border-color:var(--accent)}
@@ -183,11 +183,11 @@ html[data-theme='dark'] .friend .eyes-shut{display:inline}
 #work #projects .project.is-dragging .cover{
   outline:2px solid var(--accent);
   outline-offset:5px;
-  box-shadow:0 0 0 8px rgba(183,255,56,.18);
+  box-shadow:0 0 0 8px rgba(54,104,244,.18);
 }
 #work #projects .project.is-dragging .meta h3{color:var(--accent)}
 #work #projects .project::selection,#work #projects .project *::selection{
-  background:var(--accent);color:#1B1A17
+  background:var(--accent);color:#111111
 }
 #work #projects .project{-webkit-tap-highlight-color:transparent}
 
@@ -213,7 +213,7 @@ html[data-theme='dark'] .friend .eyes-shut{display:inline}
 #work #projects .project .cover,
 #work #projects .project:hover .cover,
 #work #projects .project .cover img{background:transparent;box-shadow:none}
-#work #projects .project.is-dragging .cover{outline:2px solid var(--accent);outline-offset:5px;box-shadow:0 0 0 8px rgba(183,255,56,.18)}
+#work #projects .project.is-dragging .cover{outline:2px solid var(--accent);outline-offset:5px;box-shadow:0 0 0 8px rgba(54,104,244,.18)}
 
 /* Delayed reveal, intentionally subtle so imagery stays dominant. */
 @media(prefers-reduced-motion:no-preference){
@@ -261,7 +261,7 @@ html[data-theme='dark'] .friend .eyes-shut{display:inline}
 }
 #work #projects .project.is-dragging .cover{
   outline:3px solid var(--accent);outline-offset:5px;
-  box-shadow:0 0 0 8px rgba(183,255,56,.24)
+  box-shadow:0 0 0 8px rgba(54,104,244,.24)
 }
 #work #projects .project.is-dragging .cover::after{opacity:.25}
 #work #projects .project.is-dragging .meta h3{color:var(--accent)}
@@ -347,3 +347,20 @@ body.home-layout footer{justify-content:center}
   transition:opacity .12s ease}
 #work-drag-hint.is-visible{opacity:1}
 @media(max-width:800px),(pointer:coarse){#work-drag-hint{display:none}}
+
+/* Blue UI accent in light/dark mode; heading words remain monochrome. */
+html[data-theme='dark'] #work #projects .project.is-dragging .cover{
+  box-shadow:0 0 0 8px rgba(168,197,255,.23)
+}
+html[data-theme='dark'] #work #projects .project.is-dragging .cover::after{opacity:.16}
+.hero h1 em,.about h2 em,.contact h2 em{color:var(--ink)}
+/* Smaller Schoolbell titles on all project-detail pages, including navigation. */
+.project-page .project-heading h1{
+  font-family:'Schoolbell',cursive;font-weight:400;
+  font-size:clamp(30px,3.8vw,50px);line-height:1.2;letter-spacing:-.025em;
+  overflow-wrap:anywhere
+}
+.project-page .project-pager span{
+  font-family:'Schoolbell',cursive;font-weight:400;
+  font-size:clamp(18px,2.2vw,25px);letter-spacing:0;line-height:1.25
+}
