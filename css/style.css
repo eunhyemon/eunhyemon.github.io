@@ -2,7 +2,7 @@
 @font-face{font-family:'LineSeed';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Th.woff2') format('woff2');font-weight:100;font-display:swap}
 @font-face{font-family:'LineSeed';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Rg.woff2') format('woff2');font-weight:400;font-display:swap}
 @font-face{font-family:'LineSeed';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');font-weight:700;font-display:swap}
-:root{--ink:#1B1A17;--accent:#B7FF38;--bg:#F6F4EE}
+:root{--ink:#232523;--accent:#B7FF38;--bg:#E8EAE9}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:'LineSeed','Apple SD Gothic Neo',sans-serif;font-weight:400;-webkit-font-smoothing:antialiased}
@@ -65,7 +65,7 @@ dialog::backdrop{background:#111b}
 @media(prefers-reduced-motion:reduce){.meta{transition:none}}
 
 /* Smooth theme switch with neon green accent. */
-:root{color-scheme:light;--surface:#F6F4EE;--soft:#ECE8DF;--muted:#6E6A63;--overlay:rgba(246,244,238,.94);--dialog-backdrop:#111b}
+:root{color-scheme:light;--surface:#E8EAE9;--soft:#D9DCDA;--muted:#626764;--overlay:rgba(232,234,233,.94);--dialog-backdrop:#111b}
 html[data-theme='dark']{color-scheme:dark;--bg:#171A1F;--ink:#F3EFE6;--surface:#171A1F;--soft:#22262D;--muted:#B8B2A8;--overlay:rgba(23,26,31,.94);--dialog-backdrop:#000c}
 body{background:var(--bg);color:var(--ink)}
 .theme-toggle{display:inline-flex;align-items:center;justify-content:center;min-width:42px;min-height:36px;border:1px solid currentColor;border-radius:100px;background:transparent;color:var(--ink);font-family:'LineSeed',sans-serif;font-size:12px;line-height:1;white-space:nowrap}
