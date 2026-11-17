@@ -116,7 +116,7 @@ if(window.gsap&&!matchMedia('(prefers-reduced-motion: reduce)').matches){
     gsap.from('.friend',{opacity:0,duration:1.1,delay:.18,ease:'power2.out'});
     gsap.from('.hero-bottom',{opacity:0,y:14,duration:1,delay:.4,ease:'power2.out'});
   }
-  gsap.to('.float-title',{y:-7,rotation:.35,duration:3.4,ease:'sine.inOut',repeat:-1,yoyo:true});
+  // Keep the scattered heading positions fixed; only the intro fade remains.
 }
 /* Small stagger for About / Contact; classes are applied only when motion is allowed. */
 if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
