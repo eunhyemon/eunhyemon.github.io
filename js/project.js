@@ -28,7 +28,7 @@ function embedVideo(raw){
 fetch('data/projects.json').then(r=>{if(!r.ok)throw Error('load');return r.json()}).then(items=>{
   const index=items.findIndex(p=>p.slug===slug);
   if(index<0){root.innerHTML='<p class="empty">프로젝트를 찾을 수 없습니다. <a href="work.html">목록으로 돌아가기 ↗</a></p>';return}
-  const p=items[index];document.title=p.title+' — EUNHYE';
+  const p=items[index];document.title=p.title+' — HAILEY';
   const gallery=Array.isArray(p.media)?p.media:(Array.isArray(p.images)?p.images:[]);
   const cover=safeUrl(p.image||p.thumbnail);
   const visibleGallery=gallery.length?gallery:[cover];
