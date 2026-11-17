@@ -2,32 +2,42 @@
   {
     "slug": "etume",
     "title": "82MAJOR",
-    "category": "Motion",
-    "summary": "유튜브 '에투메' 채널아트 및 모션 디자인, 캐릭터 디자인 작업",
-    "role": "Channel art · Motion design · Character design",
+    "category": "Channel & Content",
+    "summary": "유튜브 '에투메' 채널 론칭 디자인. 채널아트, 로고, 자막 디자인, 멤버별 캐릭터 디자인 및 모션 디자인 작업",
+    "role": "Channel art · Logo design · Subtitle design · Character design · Motion design",
     "thumbnail": "images/etume-thumb.gif",
     "images": [
       "images/etume-channel-art.jpg"
     ],
     "video": "images/etume-motion.mp4",
-    "channelUrl": "https://www.youtube.com/@etume82"
+    "channelUrl": "https://www.youtube.com/@etume82",
+    "categories": [
+      "Channel & Content",
+      "Character & Illustration"
+    ],
+    "projectType": "Channel Launch Design"
   },
   {
     "slug": "jenny-park",
     "title": "Jenny Park",
-    "category": "Motion",
+    "category": "Channel & Content",
     "thumbnail": "images/jenny-01-thumbs.png",
     "images": [
       "images/jenny-01-motion.gif"
     ],
-    "summary": "유튜브 '제니파크' 채널아트 및 모션 디자인, 캐릭터 디자인 작업",
-    "role": "Channel art · Motion design · Character design",
-    "channelUrl": "https://www.youtube.com/@__Jennypark__"
+    "summary": "유튜브 '제니파크' 채널 론칭 디자인. 채널아트, 로고, 자막 디자인, 캐릭터 디자인 및 모션 디자인 작업",
+    "role": "Channel art · Logo design · Subtitle design · Character design · Motion design",
+    "channelUrl": "https://www.youtube.com/@__Jennypark__",
+    "categories": [
+      "Channel & Content",
+      "Character & Illustration"
+    ],
+    "projectType": "Channel Launch Design"
   },
   {
     "slug": "moving-type",
     "title": "Type in Motion",
-    "category": "Motion",
+    "category": "Graphic Works",
     "year": "2026",
     "summary": "모션 샘플 프로젝트입니다. 실제 작업물로 교체해주세요.",
     "role": "Motion · Typography",
@@ -36,7 +46,7 @@
   {
     "slug": "nice-world",
     "title": "Nice Little World",
-    "category": "Graphic",
+    "category": "Graphic Works",
     "year": "2025",
     "summary": "그래픽 샘플 프로젝트입니다. 실제 작업물로 교체해주세요.",
     "role": "Graphic design",
@@ -45,7 +55,7 @@
   {
     "slug": "color-study",
     "title": "Color Study",
-    "category": "Motion",
+    "category": "Graphic Works",
     "year": "2025",
     "summary": "색과 움직임을 탐구하는 샘플 프로젝트입니다.",
     "role": "Motion · Visual direction",
