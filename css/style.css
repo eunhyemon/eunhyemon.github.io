@@ -468,8 +468,14 @@ html.intro-active .site-intro{
   rotate:5deg;
 }
 .home-layout .hero-bottom{
-  position:fixed;left:50%;top:auto;bottom:clamp(88px,12vh,135px);
-  translate:-50% 0;width:max-content;max-width:94vw;z-index:1;
+  position:fixed;left:clamp(24px,8vw,100px);top:auto;
+  bottom:clamp(70px,11vh,118px);
+  translate:none;rotate:-3deg;
+  width:max-content;max-width:min(280px,68vw);
+  text-align:left;z-index:1;
+}
+.home-layout .hero-bottom p{
+  margin:0;font-size:clamp(13px,1.25vw,16px);line-height:1.5;
 }
 .home-layout #eye-tilt-permission:not([hidden]){
   position:fixed;left:50%;top:calc(50% + (var(--home-eye-width) * 260 / 300 / 2) + 98px);
@@ -485,11 +491,12 @@ html.intro-active .site-intro{
     top:calc(50% + 85px);
     right:clamp(16px,7vw,38px);
   }
-  .home-layout .hero-bottom{bottom:clamp(52px,9vh,85px)}
+  .home-layout .hero-bottom{left:20px;bottom:clamp(60px,9vh,85px);max-width:210px;rotate:-2deg}
+  .home-layout .hero-bottom p{font-size:13px;line-height:1.45}
 }
 @media(max-height:650px){
   .home-layout .hero h1{font-size:clamp(28px,6vw,40px)}
   .home-layout .hero h1 .home-word-hailey{top:calc(50% - 105px)}
   .home-layout .hero h1 .home-word-makes{top:calc(50% + 75px)}
-  .home-layout .hero-bottom{bottom:50px}
+  .home-layout .hero-bottom{bottom:32px}
 }
