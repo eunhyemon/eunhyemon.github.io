@@ -83,16 +83,16 @@ dialog::backdrop{background:var(--dialog-backdrop)}
 #projects .project{flex:none;width:100%;scroll-snap-align:none}
 @media(max-width:750px){#projects.grid{gap:50px}header{gap:12px}nav{gap:12px}}
 
-/* Use one coordinated palette fade only while switching modes. Other hover effects stay instant. */
-@media(prefers-reduced-motion:no-preference){
-  html.theme-ready.theme-changing body,html.theme-ready.theme-changing body *{
-    transition-property:background-color,color,border-color,fill,stroke;
-    transition-duration:.32s;
-    transition-timing-function:ease-in-out;
-    transition-delay:0s;
-  }
-  html.theme-changing .meta{transition-property:opacity,transform,visibility,background-color,color}
-  html.theme-changing .cover img{transition:transform .4s ease}
+/* One viewport-wide crossfade; never fade header, footer and content separately. */
+@media (prefers-reduced-motion:no-preference){
+  ::view-transition-old(root){animation:theme-page-out .34s ease-in-out both}
+  ::view-transition-new(root){animation:theme-page-in .34s ease-in-out both}
+  @keyframes theme-page-out{from{opacity:1}to{opacity:0}}
+  @keyframes theme-page-in{from{opacity:0}to{opacity:1}}
+}
+/* Disable nested sun/moon and other element transitions while the page snapshot changes. */
+html.theme-snapshot-switch *,html.theme-snapshot-switch *::before,html.theme-snapshot-switch *::after{
+  transition:none!important;
 }
 
 /* Motion previews: optional MP4/WebM; GIF previews work as regular images. */
