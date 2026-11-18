@@ -85,7 +85,7 @@ dialog::backdrop{background:var(--dialog-backdrop)}
 
 /* Use one coordinated palette fade only while switching modes. Other hover effects stay instant. */
 @media(prefers-reduced-motion:no-preference){
-  html.theme-changing body,html.theme-changing body *{
+  html.theme-ready.theme-changing body,html.theme-ready.theme-changing body *{
     transition-property:background-color,color,border-color,fill,stroke;
     transition-duration:.32s;
     transition-timing-function:ease-in-out;
