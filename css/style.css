@@ -90,6 +90,25 @@ dialog::backdrop{background:var(--dialog-backdrop)}
   @keyframes theme-page-out{from{opacity:1}to{opacity:0}}
   @keyframes theme-page-in{from{opacity:0}to{opacity:1}}
 }
+/* Keep the hand-drawn sun/moon as a separate moving layer above the page crossfade.
+   View Transitions otherwise flatten the icon into the frozen full-page screenshot. */
+@media (prefers-reduced-motion:no-preference){
+  .theme-toggle svg{view-transition-name:theme-symbol}
+  ::view-transition-old(theme-symbol){
+    animation:theme-symbol-set .55s cubic-bezier(.22,.7,.25,1) both;
+  }
+  ::view-transition-new(theme-symbol){
+    animation:theme-symbol-rise .55s cubic-bezier(.22,.7,.25,1) both;
+  }
+  @keyframes theme-symbol-set{
+    from{opacity:1;transform:translateY(0)}
+    to{opacity:0;transform:translateY(22px)}
+  }
+  @keyframes theme-symbol-rise{
+    from{opacity:0;transform:translateY(22px)}
+    to{opacity:1;transform:translateY(0)}
+  }
+}
 /* Disable nested sun/moon and other element transitions while the page snapshot changes. */
 html.theme-snapshot-switch *,html.theme-snapshot-switch *::before,html.theme-snapshot-switch *::after{
   transition:none!important;
