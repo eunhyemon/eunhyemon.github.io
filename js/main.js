@@ -128,4 +128,21 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
 }
 
 /* Accessible, persistent theme control on every page. */
-(function(){const key='eunhye-theme';let stored=null;try{stored=localStorage.getItem(key)}catch(e){}const root=document.documentElement;const buttons=document.querySelectorAll('.theme-toggle');function apply(mode){root.dataset.theme=mode;buttons.forEach(b=>{b.setAttribute('aria-label',mode==='dark'?'라이트 모드로 변경':'다크 모드로 변경');b.setAttribute('aria-pressed',String(mode==='dark'));b.title=mode==='dark'?'Light mode':'Dark mode'})}apply(stored==='dark'||stored==='light'?stored:'light');root.classList.add('theme-ready');let themeTimer;buttons.forEach(b=>b.addEventListener('click',()=>{const next=root.dataset.theme==='dark'?'light':'dark';if(!matchMedia('(prefers-reduced-motion: reduce)').matches){root.classList.add('theme-changing');clearTimeout(themeTimer);themeTimer=setTimeout(()=>root.classList.remove('theme-changing'),370)}apply(next);try{localStorage.setItem(key,next)}catch(e){}}))})();
+(function(){const key='eunhye-theme';let stored=null;try{stored=localStorage.getItem(key)}catch(e){}const root=document.documentElement;const buttons=document.querySelectorAll('.theme-toggle');function apply(mode){root.dataset.theme=mode;buttons.forEach(b=>{b.setAttribute('aria-label',mode==='dark'?'라이트 모드로 변경':'다크 모드로 변경');b.setAttribute('aria-pressed',String(mode==='dark'));b.title=mode==='dark'?'Light mode':'Dark mode'})}apply(stored==='dark'||stored==='light'?stored:'light');root.classList.add('theme-ready');
+let activeTransition=null;
+buttons.forEach(b=>b.addEventListener('click',()=>{
+  const next=root.dataset.theme==='dark'?'light':'dark';
+  if(activeTransition){activeTransition.skipTransition();activeTransition=null}
+  const persist=()=>{try{localStorage.setItem(key,next)}catch(e){}};
+  // Unsupported browsers and reduced-motion users switch instantly rather than flicker.
+  if(typeof document.startViewTransition!=='function'||matchMedia('(prefers-reduced-motion: reduce)').matches){
+    apply(next);persist();return;
+  }
+  root.classList.add('theme-snapshot-switch');
+  const transition=document.startViewTransition(()=>{apply(next);persist()});
+  activeTransition=transition;
+  transition.finished.finally(()=>{
+    if(activeTransition===transition)activeTransition=null;
+    root.classList.remove('theme-snapshot-switch');
+  }).catch(()=>{});
+}))})();
