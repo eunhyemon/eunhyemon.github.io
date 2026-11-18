@@ -83,8 +83,17 @@ dialog::backdrop{background:var(--dialog-backdrop)}
 #projects .project{flex:none;width:100%;scroll-snap-align:none}
 @media(max-width:750px){#projects.grid{gap:50px}header{gap:12px}nav{gap:12px}}
 
-/* Animate only palette changes; respect reduced-motion preferences. */
-@media(prefers-reduced-motion:no-preference){html.theme-ready body,html.theme-ready header,html.theme-ready footer,html.theme-ready .theme-toggle,html.theme-ready nav a,html.theme-ready h1 em,html.theme-ready h2 em,html.theme-ready .meta,html.theme-ready .cover,html.theme-ready .filters button,html.theme-ready .project,html.theme-ready dialog,html.theme-ready .note,html.theme-ready #count{transition-property:background-color,color,border-color;transition-duration:.48s;transition-timing-function:ease-in-out}html.theme-ready .meta{transition:opacity .22s ease,transform .22s ease,visibility .22s ease,background-color .48s ease-in-out,color .48s ease-in-out}html.theme-ready .cover img{transition:transform .4s ease}}
+/* Use one coordinated palette fade only while switching modes. Other hover effects stay instant. */
+@media(prefers-reduced-motion:no-preference){
+  html.theme-changing body,html.theme-changing body *{
+    transition-property:background-color,color,border-color,fill,stroke;
+    transition-duration:.32s;
+    transition-timing-function:ease-in-out;
+    transition-delay:0s;
+  }
+  html.theme-changing .meta{transition-property:opacity,transform,visibility,background-color,color}
+  html.theme-changing .cover img{transition:transform .4s ease}
+}
 
 /* Motion previews: optional MP4/WebM; GIF previews work as regular images. */
 .cover{position:relative}
