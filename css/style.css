@@ -1151,7 +1151,7 @@ body .about-page #doodle-clear:hover{color:var(--accent)}
 body.project-detail-page #site-header .nav-close,
 body.project-open #site-header .nav-close{display:inline-block!important}
 /* ABOUT remains visible at bottom-left, including opened projects. */
-#site-header .nav-close span{font-size:1.45em;vertical-align:-.055em}
+/* Removed old ×-icon font scaling: CLOSE now uses the same typography as ABOUT. */
 #work-drag-hint{
   font-family:"DM Sans","LineSeed",Arial,sans-serif!important;
   font-weight:800!important;font-size:12px!important;
@@ -1697,4 +1697,31 @@ body.project-detail-page #site-header .nav-close{display:inline-flex!important}
     left:auto!important;
     bottom:max(25px,env(safe-area-inset-bottom))!important;
   }
+}
+
+/* Keep CLOSE identical in type size to ABOUT, including nested roll labels. */
+#site-header nav .nav-close,
+#site-header nav .nav-about{
+  font-family:var(--portfolio-sans)!important;
+  font-size:clamp(12px,1vw,14px)!important;
+  font-weight:800!important;
+  line-height:1.18!important;
+  letter-spacing:-.025em!important;
+}
+#site-header .nav-close .nav-roll,
+#site-header .nav-close .nav-roll-line,
+#site-header .nav-about .nav-roll,
+#site-header .nav-about .nav-roll-line{
+  font-size:inherit!important;
+  font-weight:inherit!important;
+  line-height:1.18!important;
+}
+/* Display typography uppercase without altering project data or link slugs. */
+body.work-home #work-drag-hint,
+#work #projects .project .meta h3,
+.project-heading h1,
+.project-pager a span,
+.project-overlay .project-heading h1,
+.project-split .project-heading h1{
+  text-transform:uppercase!important;
 }
