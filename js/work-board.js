@@ -32,13 +32,23 @@
   }
   function layout() {
     const cards = Array.from(board.querySelectorAll('.project'));
+    const home = document.body.classList.contains('work-home');
     const rows = Math.max(1, Math.ceil(cards.length / 4));
-    board.style.setProperty('--board-height', (rows * 650 + 45) + 'px');
+    board.style.setProperty('--board-height', home ? '100%' : (rows * 650 + 45) + 'px');
+    const homeSlots = [
+      {x:3,y:.04,w:22,r:-4},
+      {x:34,y:.07,w:24,r:3},
+      {x:73,y:.03,w:21,r:-3},
+      {x:16,y:.55,w:23,r:3},
+      {x:56,y:.54,w:23,r:-3}
+    ];
     cards.forEach((card, i) => {
       const id = card.getAttribute('href');
-      const slot = slots[i % slots.length];
-      const row = Math.floor(i / slots.length);
-      const pos = layouts.get(id) || {x:slot.x,y:slot.y+row*650};
+      const slot = home ? homeSlots[i % homeSlots.length] : slots[i % slots.length];
+      const row = home ? 0 : Math.floor(i / slots.length);
+      const maxY = home ? Math.max(0,board.clientHeight-(Math.min(218,window.innerHeight*.23)+35)) : 0;
+      const naturalY = home ? Math.round(slot.y * board.clientHeight) : slot.y+row*650;
+      const pos = layouts.get(id) || {x:slot.x,y:home ? Math.min(maxY,naturalY) : naturalY};
       card.style.setProperty('--x',pos.x+'%');
       card.style.setProperty('--y',pos.y+'px');
       card.style.setProperty('--w',slot.w+'%');
