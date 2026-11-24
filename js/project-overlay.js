@@ -91,7 +91,12 @@
    const targetImage=overlay.querySelector('.project-overlay-cover img');
    targetImage.style.visibility='hidden';
    const source=thumb?.getBoundingClientRect();
-   const target=overlay.querySelector('.project-overlay-cover').getBoundingClientRect();
+   // Measure the displayed image itself, not its much larger flex container.
+   // Otherwise narrow/transparent thumbnails balloon, then snap back in size.
+   if(!targetImage.complete && targetImage.decode){
+     try { await Promise.race([targetImage.decode().catch(()=>{}),new Promise(done=>setTimeout(done,700))]); } catch(_){}
+   }
+   const target=targetImage.getBoundingClientRect();
    document.body.classList.add('project-open');
    requestAnimationFrame(()=>overlay?.classList.add('is-visible'));
    if(push)history.pushState({haileyOverlay:true,slug},'', 'project.html?slug='+encodeURIComponent(slug));
@@ -112,7 +117,7 @@
    const el=overlay;
    el.classList.remove('is-settled');
    const img=el.querySelector('.project-overlay-cover img');
-   const from=el.querySelector('.project-overlay-cover').getBoundingClientRect();
+   const from=img.getBoundingClientRect();
    const thumb=activeCard?.querySelector('.cover img');
    const to=thumb?.getBoundingClientRect();
    el.querySelector('.project-overlay-scroll').scrollTop=0;
