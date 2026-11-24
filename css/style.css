@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Schoolbell&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap');
 @font-face{font-family:'LineSeed';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Th.woff2') format('woff2');font-weight:100;font-display:swap}
 @font-face{font-family:'LineSeed';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Rg.woff2') format('woff2');font-weight:400;font-display:swap}
 @font-face{font-family:'LineSeed';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');font-weight:700;font-display:swap}
@@ -732,4 +732,84 @@ footer{font-family:var(--portfolio-sans);font-size:11px}
 @media(max-height:550px){
  body.home-layout .hero-bottom{bottom:65px}
  body.home-layout #doodle-clear{bottom:16px}
+}
+
+
+/* Fixed corner-navigation system, based on the requested minimalist reference. */
+/* DM Sans is applied to Latin; Korean glyphs fall back to LineSeed. */
+:root{--portfolio-sans:"DM Sans","LineSeed","Apple SD Gothic Neo",Arial,sans-serif}
+body{font-family:var(--portfolio-sans)}
+#site-header{
+  position:fixed!important;
+  inset:0 0 auto 0!important;
+  width:100%!important;
+  height:0!important;
+  padding:0!important;
+  margin:0!important;
+  display:block!important;
+  z-index:80!important;
+  pointer-events:none!important;
+  background:transparent!important;
+}
+#site-header nav{display:contents!important}
+#site-header .logo,#site-header nav a,#site-header .theme-toggle{
+  position:fixed!important;pointer-events:auto!important;z-index:81;
+  font-family:var(--portfolio-sans)!important;
+  font-weight:750!important;
+  letter-spacing:-.025em!important;
+  text-decoration:none;
+  line-height:1.2;
+}
+#site-header .logo{
+  top:clamp(22px,4vw,50px)!important;left:clamp(22px,4vw,64px)!important;
+  font-size:clamp(13px,1.1vw,16px)!important;
+}
+#site-header nav a:nth-of-type(1){
+  top:clamp(22px,4vw,50px)!important;right:clamp(22px,4vw,64px)!important;
+}
+#site-header nav a:nth-of-type(2){
+  bottom:clamp(26px,4vw,55px)!important;left:clamp(22px,4vw,64px)!important;
+}
+#site-header nav a:nth-of-type(3){
+  bottom:clamp(26px,4vw,55px)!important;right:clamp(22px,4vw,64px)!important;
+}
+#site-header nav a{font-size:clamp(12px,1vw,14px)!important}
+#site-header .theme-toggle{
+  top:clamp(14px,3.5vw,43px)!important;
+  right:clamp(112px,11vw,171px)!important;
+  min-width:36px;min-height:28px;border:0!important;
+}
+#site-header .theme-toggle svg{width:51px!important;height:25px!important}
+#site-header nav a:hover,#site-header .logo:hover{opacity:.58}
+#site-header nav a:focus-visible,#site-header .logo:focus-visible{
+  outline:2px solid var(--accent);outline-offset:5px
+}
+/* The same persistent frame surrounds the work and information pages. */
+body:not(.home-layout) .page{padding-top:clamp(76px,8vw,114px);padding-bottom:80px}
+body:not(.home-layout) .project-page{padding-top:clamp(100px,10vw,145px);padding-bottom:140px}
+body:not(.home-layout) footer{display:none}
+body:not(.home-layout) .work{padding-top:clamp(15px,2.4vw,35px)}
+body:not(.home-layout) .about,body:not(.home-layout) .contact{padding-top:clamp(35px,5vw,80px)}
+/* Categories are deliberate, bold navigation rather than light metadata. */
+.filters button{
+  font-family:var(--portfolio-sans)!important;
+  font-size:clamp(11px,1vw,13px)!important;
+  font-weight:750!important;
+  letter-spacing:-.01em!important
+}
+.filters button.active{color:var(--ink)}
+.about-playground .about-word{font-family:var(--portfolio-sans)!important;font-weight:750!important}
+#work #projects .project .meta h3{font-weight:750!important}
+.project-heading small,.project-category{font-family:var(--portfolio-sans);font-weight:700}
+@media(max-width:750px){
+  #site-header .logo{left:20px!important;top:25px!important}
+  #site-header nav a:nth-of-type(1){right:20px!important;top:25px!important}
+  #site-header nav a:nth-of-type(2){left:20px!important;bottom:max(25px,env(safe-area-inset-bottom))!important}
+  #site-header nav a:nth-of-type(3){right:20px!important;bottom:max(25px,env(safe-area-inset-bottom))!important}
+  #site-header nav a{font-size:12px!important}
+  #site-header .theme-toggle{top:17px!important;right:103px!important;min-width:32px}
+  body:not(.home-layout) .page{padding-top:85px;padding-bottom:90px}
+  body:not(.home-layout) .project-page{padding-top:110px;padding-bottom:125px}
+  body:not(.home-layout) .work{padding-top:15px}
+  body:not(.home-layout) .about,body:not(.home-layout) .contact{padding-top:35px}
 }
