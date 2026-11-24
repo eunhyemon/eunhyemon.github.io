@@ -950,10 +950,27 @@ body.work-home #work #projects.grid{
  #site-header nav a:nth-of-type(2){bottom:max(25px,env(safe-area-inset-bottom))!important;right:20px!important;left:auto!important;top:auto!important}
 }
 
-/* Soft editorial page transitions, without changing the current page interactions. */
+/* Native cross-document transitions: fixed frame stays in place, content swaps. */
+@view-transition{navigation:auto}
+#site-header .logo{view-transition-name:portfolio-logo}
+#site-header nav a:nth-of-type(1){view-transition-name:portfolio-about}
+#site-header nav a:nth-of-type(2){view-transition-name:portfolio-contact}
 @media(prefers-reduced-motion:no-preference){
-  html.page-entering body{opacity:0;transform:translateY(9px)}
-  html.page-leaving body{opacity:0;transform:translateY(-7px);pointer-events:none}
-  html body{transition:opacity .22s ease,transform .22s cubic-bezier(.2,.7,.2,1)}
+ ::view-transition-old(portfolio-logo),
+ ::view-transition-new(portfolio-logo),
+ ::view-transition-old(portfolio-about),
+ ::view-transition-new(portfolio-about),
+ ::view-transition-old(portfolio-contact),
+ ::view-transition-new(portfolio-contact){animation-duration:0s!important}
+ ::view-transition-old(root){animation:portfolio-content-out .18s ease-in both}
+ ::view-transition-new(root){animation:portfolio-content-in .28s ease-out both}
+ @keyframes portfolio-content-out{to{opacity:0;transform:translateY(-6px)}}
+ @keyframes portfolio-content-in{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:none}}
+ html.page-entering .page{opacity:0;transform:translateY(8px)}
+ html.page-leaving .page{opacity:0;transform:translateY(-6px);pointer-events:none}
+ html .page{transition:opacity .2s ease,transform .2s ease}
 }
-@media(prefers-reduced-motion:reduce){html body{transition:none!important}}
+@media(prefers-reduced-motion:reduce){
+ ::view-transition-old(root),::view-transition-new(root){animation-duration:0s!important}
+ html .page{transition:none!important}
+}
