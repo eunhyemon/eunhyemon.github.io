@@ -1539,7 +1539,7 @@ body.work-home #work-drag-hint{
   letter-spacing:-.015em!important;
   color:var(--ink)!important;
   transform:translate(17px,16px)!important;
-  text-shadow:0 1px 3px rgba(255,255,255,.75);
+  text-shadow:none!important;
 }
 /* The transition image lands on the rendered image dimensions, not the gallery viewport. */
 .project-overlay .project-visuals .project-overlay-cover img{
