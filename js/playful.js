@@ -1,7 +1,7 @@
 /* Lightweight playful details: draw on the home canvas, confetti on Contact. */
 (() => {
-  const hero = document.querySelector('.hero');
   const canvas = document.getElementById('doodle-canvas');
+  const hero = canvas?.closest('.about-full-canvas, .hero');
   const clear = document.getElementById('doodle-clear');
   const fine = matchMedia('(pointer:fine)');
   if (hero && canvas && clear && fine.matches) {
