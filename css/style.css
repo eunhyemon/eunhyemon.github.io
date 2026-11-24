@@ -1423,3 +1423,84 @@ body.project-detail-page .back-to-work{
     scroll-snap-type:none!important;
   }
 }
+
+/* Mobile homepage is a scaled-down freeform collage, NOT a horizontal carousel. */
+@media (max-width:800px), (pointer:coarse){
+ body.work-home .page{
+  padding:clamp(88px,12vh,112px) 16px max(76px,env(safe-area-inset-bottom))!important
+ }
+ body.work-home #work .filters{
+  justify-content:flex-start;
+  gap:clamp(10px,3vw,17px);
+  margin-bottom:clamp(18px,3vh,30px)!important;
+ }
+ body.work-home #work .filters button{
+  font-size:clamp(9px,2.35vw,12px)!important
+ }
+ body.work-home #work #projects.grid{
+  position:relative!important;
+  display:block!important;
+  overflow:hidden!important;
+  width:100%!important;
+  max-width:none!important;
+  height:auto!important;
+  min-height:0!important;
+  flex:1 1 auto!important;
+  scroll-snap-type:none!important;
+  scroll-behavior:auto!important;
+  touch-action:none;
+ }
+ body.work-home #work #projects .project{
+  position:absolute!important;
+  display:block!important;
+  flex:none!important;
+  top:var(--y,0px)!important;
+  left:var(--x,0%)!important;
+  width:var(--w,30%)!important;
+  height:auto!important;
+  min-width:0!important;
+  margin:0!important;
+  transform:translate3d(var(--touch-x,0px),var(--touch-y,0px),0) rotate(var(--rotation,0deg))!important;
+  transform-origin:center center;
+  transition:none!important;
+  touch-action:none!important;
+  scroll-snap-align:none!important;
+  cursor:grab;
+  -webkit-touch-callout:none;
+  -webkit-user-select:none;
+  user-select:none
+ }
+ body.work-home #work #projects .project.is-touch-dragging{
+  cursor:grabbing;
+  filter:drop-shadow(0 9px 13px rgba(0,0,0,.12));
+ }
+ body.work-home #work #projects .project .cover{
+  width:100%!important;
+  display:flex;
+  align-items:center;justify-content:center;
+  max-height:clamp(75px,16vh,150px)!important;
+  background:transparent!important
+ }
+ body.work-home #work #projects .project .cover img{
+  display:block;
+  width:auto!important;height:auto!important;
+  max-width:100%!important;
+  max-height:clamp(75px,16vh,150px)!important;
+  object-fit:contain
+ }
+ body.work-home #work #projects .project .meta{
+  display:block!important;
+  margin:0!important;
+  padding:5px 0 0!important;
+  text-align:center!important
+ }
+ body.work-home #work #projects .project .meta h3{
+  font-size:clamp(9px,2.3vw,12px)!important;
+  font-weight:650!important;
+  line-height:1.35!important;
+ }
+}
+@media(max-height:650px) and (max-width:800px){
+ body.work-home #work #projects .project .cover,
+ body.work-home #work #projects .project .cover img{max-height:clamp(60px,14vh,100px)!important}
+}
