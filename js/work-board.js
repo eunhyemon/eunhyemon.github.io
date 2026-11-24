@@ -125,6 +125,96 @@
     card.addEventListener('pointercancel',end);
     try{card.setPointerCapture(event.pointerId)}catch(_){}
   });
+  /* Touch: long-press a card to move it freely; quick swipe browses the gallery. */
+  if (document.body.classList.contains('work-home') && matchMedia('(pointer: coarse)').matches) {
+    const HOLD_MS = 300;
+    const DELTA = 9;
+    const positions = new Map();
+    let gesture = null;
+    let suppressClickUntil = 0;
+    const clamp = (v, min, max) => Math.max(min, Math.min(max, v));
+    const cancelTimer = g => { if (g?.timer) { clearTimeout(g.timer); g.timer = null; } };
+    const moveCard = (card, x, y) => {
+      card.style.setProperty('--touch-x', x + 'px');
+      card.style.setProperty('--touch-y', y + 'px');
+    };
+    const endGesture = (event, cancelled = false) => {
+      const g = gesture;
+      if (!g || (event.pointerId !== undefined && event.pointerId !== g.id)) return;
+      cancelTimer(g);
+      if (g.mode === 'drag') {
+        g.card.classList.remove('is-touch-dragging');
+        positions.set(g.card, {x:g.x,y:g.y});
+        suppressClickUntil = performance.now() + 500;
+      } else if (g.mode === 'swipe' || cancelled || g.mode === 'hold') {
+        suppressClickUntil = performance.now() + 500;
+      }
+      g.card.classList.remove('is-touch-holding');
+      if (g.mode === 'swipe') {
+        const destination = Math.round(board.scrollLeft / (g.card.offsetWidth + 18)) * (g.card.offsetWidth + 18);
+        board.scrollTo({left:destination,behavior:cancelled?'instant':'smooth'});
+      }
+      try { if (g.card.hasPointerCapture(g.id)) g.card.releasePointerCapture(g.id); } catch (_) {}
+      gesture = null;
+    };
+    board.addEventListener('pointerdown', e => {
+      if (e.pointerType === 'mouse' || !e.isPrimary || document.body.classList.contains('project-open') || gesture) return;
+      const card = e.target.closest('.project');
+      if (!card || !board.contains(card)) return;
+      const pos = positions.get(card) || {x:0,y:0};
+      const rect = card.getBoundingClientRect();
+      const viewport = board.getBoundingClientRect();
+      const g = {
+        id:e.pointerId, card, startX:e.clientX, startY:e.clientY,
+        startScroll:board.scrollLeft, pos, x:pos.x, y:pos.y,
+        rect, viewport, mode:'hold', timer:null
+      };
+      gesture = g;
+      g.timer = setTimeout(() => {
+        if (gesture !== g || g.mode !== 'hold') return;
+        g.mode = 'drag';
+        card.classList.add('is-touch-holding','is-touch-dragging');
+        card.style.zIndex = String(++topZ);
+        if (navigator.vibrate) navigator.vibrate(12);
+      }, HOLD_MS);
+      try { card.setPointerCapture(e.pointerId); } catch (_) {}
+    });
+    board.addEventListener('pointermove', e => {
+      const g = gesture;
+      if (!g || e.pointerId !== g.id) return;
+      const dx = e.clientX - g.startX, dy = e.clientY - g.startY;
+      if (g.mode === 'hold' && Math.hypot(dx, dy) > DELTA) {
+        cancelTimer(g);
+        g.mode = 'swipe';
+      }
+      if (g.mode === 'swipe') {
+        board.scrollLeft = g.startScroll - dx;
+        return;
+      }
+      if (g.mode !== 'drag') return;
+      e.preventDefault();
+      const leftLimit = g.viewport.left + 8 - g.rect.left;
+      const rightLimit = g.viewport.right - 8 - g.rect.right;
+      const topLimit = g.viewport.top + 4 - g.rect.top;
+      const bottomLimit = g.viewport.bottom - 4 - g.rect.bottom;
+      const nextX = clamp(g.pos.x + dx, g.pos.x + leftLimit, g.pos.x + rightLimit);
+      const nextY = clamp(g.pos.y + dy, g.pos.y + topLimit, g.pos.y + bottomLimit);
+      g.x = nextX; g.y = nextY;
+      moveCard(g.card, nextX, nextY);
+    }, {passive:false});
+    board.addEventListener('pointerup', e => endGesture(e));
+    board.addEventListener('pointercancel', e => endGesture(e,true));
+    addEventListener('blur', () => {if(gesture)endGesture({pointerId:gesture.id},true)});
+    board.addEventListener('click', e => {
+      if (performance.now() < suppressClickUntil) {
+        e.preventDefault();e.stopImmediatePropagation();
+      }
+    }, true);
+    board.addEventListener('work:rendered', () => {
+      positions.clear();
+      gesture=null;
+    });
+  }
   /* Cursor-following DRAG! label over draggable cards only. */
   if (desktop.matches && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
     const hint=document.createElement('span');
