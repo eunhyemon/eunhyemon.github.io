@@ -99,7 +99,7 @@
    const target=targetImage.getBoundingClientRect();
    document.body.classList.add('project-open');
    requestAnimationFrame(()=>overlay?.classList.add('is-visible'));
-   if(push)history.pushState({haileyOverlay:true,slug},'', 'project.html?slug='+encodeURIComponent(slug));
+   if(push)history.pushState({haileyOverlay:true,slug},'', 'index.html?slug='+encodeURIComponent(slug));
    if(thumb&&source&&source.width>0&&target.width>0){
      await tween(thumb,source,target,590);
    }else if(!reduced.matches){
@@ -136,7 +136,7 @@
  }
  function close(){
    if(!overlay||busy)return;
-   if(history.state?.haileyOverlay && location.pathname.endsWith('/project.html'))history.back();
+   if(history.state?.haileyOverlay && new URLSearchParams(location.search).has('slug'))history.back();
    else{history.replaceState(null,'','index.html');closeVisual()}
  }
  // Old page-transition handler intentionally ignores project cards.
@@ -163,7 +163,19 @@
    if(overlay&&(!slug||slug!==activeSlug))closeVisual();
    else if(!overlay&&slug){
      const card=[...board.querySelectorAll('.project')].find(a=>new URL(a.href,location.href).searchParams.get('slug')===slug);
-     if(card)open(card,slug,false);
+     open(card||null,slug,false);
    }
  });
+ // Reload or shared links must restore the same expanded project UI.
+ const initialSlug=new URLSearchParams(location.search).get('slug');
+ if(initialSlug){
+   if('scrollRestoration' in history)history.scrollRestoration='manual';
+   const restore=()=>{
+     if(overlay||busy)return;
+     const card=[...board.querySelectorAll('.project')].find(a=>new URL(a.href,location.href).searchParams.get('slug')===initialSlug);
+     open(card||null,initialSlug,false);
+   };
+   board.addEventListener('work:rendered',restore,{once:true});
+   projectsPromise.then(restore).catch(()=>{});
+ }
 })();
