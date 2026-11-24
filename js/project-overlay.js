@@ -8,7 +8,11 @@
  const safeUrl=value=>{
    if(typeof value!=='string')return '';
    const src=value.trim();
-   return /^(?:https?:\/\/|[a-zA-Z0-9_./-]+(?:\?[^<>]*)?)$/.test(src) && !src.startsWith('//') ? src : '';
+   if(!src||src.startsWith('//'))return '';
+   try{
+     const url=new URL(src,location.href);
+     return (url.protocol==='https:'||url.protocol==='http:')?src:'';
+   }catch(_){return ''}
  };
  const projectsPromise=fetch('data/projects.json').then(r=>{if(!r.ok)throw Error('project data');return r.json()});
  let overlay=null,activeCard=null,activeSlug='',busy=false;
