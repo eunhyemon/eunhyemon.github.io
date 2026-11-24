@@ -974,3 +974,56 @@ body.work-home #work #projects.grid{
  ::view-transition-old(root),::view-transition-new(root){animation-duration:0s!important}
  html .page{transition:none!important}
 }
+
+
+/* November editorial refinement: consistent corners, quieter About hierarchy. */
+/* Reserve the scrollbar lane on both scrollable pages and the one-screen index. */
+html{scrollbar-gutter:stable}
+#site-header .logo,
+#site-header nav a{white-space:nowrap}
+#site-header nav a .nav-arrow{
+ position:absolute;left:calc(100% + 5px);top:0;
+ display:inline-block;opacity:0;transform:translate(-4px,2px);
+ pointer-events:none
+}
+#site-header nav a:hover .nav-arrow,
+#site-header nav a:focus-visible .nav-arrow{opacity:1;transform:translate(0,0)}
+/* Pin the ABOUT and CONTACT labels to identical viewport coordinates everywhere. */
+#site-header nav a:nth-of-type(1){
+ top:clamp(22px,4vw,50px)!important;right:clamp(22px,4vw,64px)!important;
+ bottom:auto!important;left:auto!important
+}
+#site-header nav a:nth-of-type(2){
+ top:auto!important;bottom:clamp(26px,4vw,55px)!important;
+ right:clamp(22px,4vw,64px)!important;left:auto!important
+}
+/* Smaller, less emphatic typographic headline with an editorial text block. */
+.about>div:first-child,
+.contact{max-width:950px}
+.about>div:first-child h2{
+ font-family:var(--portfolio-sans)!important;
+ font-size:clamp(38px,4.2vw,62px)!important;
+ font-weight:500!important;letter-spacing:-.055em!important;
+ line-height:1.13!important;
+ margin:0 0 clamp(28px,3.5vw,48px)!important
+}
+.about>div:first-child h2 em{font-style:normal!important;font-weight:500!important}
+.about>div:first-child p{
+ max-width:600px;font-size:clamp(13px,1.1vw,16px);
+ line-height:1.95;letter-spacing:-.015em;color:var(--ink)
+}
+.about .about-drawing{
+ max-width:950px;
+ height:clamp(300px,35vw,470px)!important;
+ min-height:300px!important;
+ margin-top:clamp(42px,5vw,75px)!important
+}
+.about .about-drawing .friend{width:clamp(100px,11vw,145px)!important}
+@media(max-width:750px){
+ #site-header nav a:nth-of-type(1){top:25px!important;right:20px!important;left:auto!important;bottom:auto!important}
+ #site-header nav a:nth-of-type(2){bottom:max(25px,env(safe-area-inset-bottom))!important;right:20px!important;left:auto!important;top:auto!important}
+ .about>div:first-child h2{font-size:clamp(36px,8vw,48px)!important;letter-spacing:-.05em!important}
+ .about>div:first-child p{font-size:14px;line-height:1.85}
+ .about .about-drawing{height:360px!important;margin-top:52px!important}
+ .about .about-drawing .friend{width:120px!important}
+}
