@@ -203,7 +203,7 @@
   if (desktop.matches && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
     const hint=document.createElement('span');
     hint.id='work-drag-hint';
-    hint.textContent='DRAG!';
+    hint.textContent='';
     hint.setAttribute('aria-hidden','true');
     document.body.appendChild(hint);
     const setVisible=(e)=>{
@@ -211,8 +211,7 @@
       const visible=!!card && board.contains(card);
       hint.classList.toggle('is-visible',visible);
       if(visible){
-        const dragging=card.classList.contains('is-dragging');
-        hint.textContent=dragging?'DRAG!':(card.querySelector('.meta h3')?.textContent?.trim() || 'VIEW WORK');
+        hint.textContent=card.querySelector('.meta h3')?.textContent?.trim() || '';
         hint.style.left=Math.min(e.clientX,innerWidth-180)+'px';
         hint.style.top=Math.min(e.clientY,innerHeight-45)+'px';
       }
