@@ -1504,3 +1504,26 @@ body.project-detail-page .back-to-work{
  body.work-home #work #projects .project .cover,
  body.work-home #work #projects .project .cover img{max-height:clamp(60px,14vh,100px)!important}
 }
+
+/* Keep the homepage visually image-only; project names live in accessible links
+   and appear beside the mouse on desktop hover. Detail pages remain unchanged. */
+body.work-home #work #projects .project .meta,
+body.work-home #work #projects .project:hover .meta,
+body.work-home #work #projects .project:focus-visible .meta{
+ display:none!important;
+}
+body.work-home #work-drag-hint{
+ max-width:min(270px,68vw);
+ overflow:hidden;
+ text-overflow:ellipsis;
+ text-align:left;
+ white-space:nowrap;
+ padding:7px 10px;
+ font-family:"DM Sans","LineSeed",Arial,sans-serif!important;
+ font-weight:700!important;
+ font-size:12px!important;
+ letter-spacing:-.01em!important;
+ line-height:1.25!important;
+ background:var(--bg,#fff);
+ border:1px solid rgba(0,0,0,.13);
+}
