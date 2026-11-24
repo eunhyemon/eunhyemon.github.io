@@ -1,4 +1,4 @@
-/* Work collage: intentional scattered placements, draggable on desktop.
+/* Work collage: intentional scattered placements, draggable on desktop and touch screens.
    This file does not affect project detail pages or project data. */
 (() => {
   const board = document.getElementById('projects');
@@ -35,7 +35,14 @@
     const home = document.body.classList.contains('work-home');
     const rows = Math.max(1, Math.ceil(cards.length / 4));
     board.style.setProperty('--board-height', home ? '100%' : (rows * 650 + 45) + 'px');
-    const homeSlots = [
+    const mobileHome = home && matchMedia('(max-width:800px), (pointer:coarse)').matches;
+    const homeSlots = mobileHome ? [
+      {x:1,y:.045,w:30,r:-5},
+      {x:37,y:.02,w:28,r:4},
+      {x:73,y:.09,w:26,r:-3},
+      {x:14,y:.54,w:34,r:3},
+      {x:57,y:.53,w:34,r:-4}
+    ] : [
       {x:3,y:.04,w:22,r:-4},
       {x:34,y:.07,w:24,r:3},
       {x:73,y:.03,w:21,r:-3},
@@ -46,7 +53,7 @@
       const id = card.getAttribute('href');
       const slot = home ? homeSlots[i % homeSlots.length] : slots[i % slots.length];
       const row = home ? 0 : Math.floor(i / slots.length);
-      const maxY = home ? Math.max(0,board.clientHeight-(Math.min(218,window.innerHeight*.23)+35)) : 0;
+      const maxY = home ? Math.max(0,board.clientHeight-(mobileHome ? Math.min(120,window.innerHeight*.16)+32 : Math.min(218,window.innerHeight*.23)+35)) : 0;
       const naturalY = home ? Math.round(slot.y * board.clientHeight) : slot.y+row*650;
       const pos = layouts.get(id) || {x:slot.x,y:home ? Math.min(maxY,naturalY) : naturalY};
       card.style.setProperty('--x',pos.x+'%');
@@ -125,95 +132,72 @@
     card.addEventListener('pointercancel',end);
     try{card.setPointerCapture(event.pointerId)}catch(_){}
   });
-  /* Touch: long-press a card to move it freely; quick swipe browses the gallery. */
-  if (document.body.classList.contains('work-home') && matchMedia('(pointer: coarse)').matches) {
-    const HOLD_MS = 300;
-    const DELTA = 9;
-    const positions = new Map();
+  /* Mobile collage: tap opens; moving a finger drags the card inside the canvas. */
+  if (document.body.classList.contains('work-home') && matchMedia('(pointer:coarse)').matches) {
     let gesture = null;
-    let suppressClickUntil = 0;
-    const clamp = (v, min, max) => Math.max(min, Math.min(max, v));
-    const cancelTimer = g => { if (g?.timer) { clearTimeout(g.timer); g.timer = null; } };
-    const moveCard = (card, x, y) => {
-      card.style.setProperty('--touch-x', x + 'px');
-      card.style.setProperty('--touch-y', y + 'px');
-    };
-    const endGesture = (event, cancelled = false) => {
-      const g = gesture;
-      if (!g || (event.pointerId !== undefined && event.pointerId !== g.id)) return;
-      cancelTimer(g);
-      if (g.mode === 'drag') {
-        g.card.classList.remove('is-touch-dragging');
-        positions.set(g.card, {x:g.x,y:g.y});
-        suppressClickUntil = performance.now() + 500;
-      } else if (g.mode === 'swipe' || cancelled || g.mode === 'hold') {
-        suppressClickUntil = performance.now() + 500;
-      }
-      g.card.classList.remove('is-touch-holding');
-      if (g.mode === 'swipe') {
-        const destination = Math.round(board.scrollLeft / (g.card.offsetWidth + 18)) * (g.card.offsetWidth + 18);
-        board.scrollTo({left:destination,behavior:cancelled?'instant':'smooth'});
-      }
-      try { if (g.card.hasPointerCapture(g.id)) g.card.releasePointerCapture(g.id); } catch (_) {}
-      gesture = null;
-    };
+    let suppressUntil = 0;
+    const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
     board.addEventListener('pointerdown', e => {
-      if (e.pointerType === 'mouse' || !e.isPrimary || document.body.classList.contains('project-open') || gesture) return;
+      if(e.pointerType === 'mouse' || !e.isPrimary || gesture || document.body.classList.contains('project-open'))return;
       const card = e.target.closest('.project');
-      if (!card || !board.contains(card)) return;
-      const pos = positions.get(card) || {x:0,y:0};
-      const rect = card.getBoundingClientRect();
-      const viewport = board.getBoundingClientRect();
-      const g = {
-        id:e.pointerId, card, startX:e.clientX, startY:e.clientY,
-        startScroll:board.scrollLeft, pos, x:pos.x, y:pos.y,
-        rect, viewport, mode:'hold', timer:null
+      if(!card || !board.contains(card))return;
+      const cardRect = card.getBoundingClientRect();
+      const bound = board.getBoundingClientRect();
+      gesture = {
+        card, id:e.pointerId,
+        startX:e.clientX, startY:e.clientY,
+        startLeft:cardRect.left, startTop:cardRect.top,
+        bound, width:cardRect.width, height:cardRect.height,
+        moved:false
       };
-      gesture = g;
-      g.timer = setTimeout(() => {
-        if (gesture !== g || g.mode !== 'hold') return;
-        g.mode = 'drag';
-        card.classList.add('is-touch-holding','is-touch-dragging');
-        card.style.zIndex = String(++topZ);
-        if (navigator.vibrate) navigator.vibrate(12);
-      }, HOLD_MS);
-      try { card.setPointerCapture(e.pointerId); } catch (_) {}
+      try{card.setPointerCapture(e.pointerId)}catch(_){}
     });
     board.addEventListener('pointermove', e => {
-      const g = gesture;
-      if (!g || e.pointerId !== g.id) return;
-      const dx = e.clientX - g.startX, dy = e.clientY - g.startY;
-      if (g.mode === 'hold' && Math.hypot(dx, dy) > DELTA) {
-        cancelTimer(g);
-        g.mode = 'swipe';
+      const g=gesture;
+      if(!g || g.id!==e.pointerId)return;
+      const dx=e.clientX-g.startX,dy=e.clientY-g.startY;
+      if(!g.moved && Math.hypot(dx,dy)<7)return;
+      if(!g.moved){
+        g.moved=true;
+        g.card.classList.add('is-touch-dragging');
+        g.card.style.zIndex=String(++topZ);
       }
-      if (g.mode === 'swipe') {
-        board.scrollLeft = g.startScroll - dx;
-        return;
-      }
-      if (g.mode !== 'drag') return;
       e.preventDefault();
-      const leftLimit = g.viewport.left + 8 - g.rect.left;
-      const rightLimit = g.viewport.right - 8 - g.rect.right;
-      const topLimit = g.viewport.top + 4 - g.rect.top;
-      const bottomLimit = g.viewport.bottom - 4 - g.rect.bottom;
-      const nextX = clamp(g.pos.x + dx, g.pos.x + leftLimit, g.pos.x + rightLimit);
-      const nextY = clamp(g.pos.y + dy, g.pos.y + topLimit, g.pos.y + bottomLimit);
-      g.x = nextX; g.y = nextY;
-      moveCard(g.card, nextX, nextY);
-    }, {passive:false});
-    board.addEventListener('pointerup', e => endGesture(e));
-    board.addEventListener('pointercancel', e => endGesture(e,true));
-    addEventListener('blur', () => {if(gesture)endGesture({pointerId:gesture.id},true)});
-    board.addEventListener('click', e => {
-      if (performance.now() < suppressClickUntil) {
-        e.preventDefault();e.stopImmediatePropagation();
+      const left=clamp(g.startLeft+dx,g.bound.left,g.bound.right-g.width);
+      const top=clamp(g.startTop+dy,g.bound.top,g.bound.bottom-g.height);
+      // Translate relative to the card's initial position, not the active touch point.
+      g.card.style.setProperty('--touch-x',(left-g.startLeft)+'px');
+      g.card.style.setProperty('--touch-y',(top-g.startTop)+'px');
+    },{passive:false});
+    const finish=e=>{
+      const g=gesture;
+      if(!g || e.pointerId!==g.id)return;
+      if(g.moved){
+        g.card.classList.remove('is-touch-dragging');
+        const left=parseFloat(g.card.style.getPropertyValue('--touch-x'))||0;
+        const top=parseFloat(g.card.style.getPropertyValue('--touch-y'))||0;
+        const boardRect=board.getBoundingClientRect();
+        // Persist the new position in the same coordinates as the desktop board.
+        const originalLeft=(parseFloat(g.card.style.getPropertyValue('--x'))||0)*boardRect.width/100;
+        const originalTop=parseFloat(g.card.style.getPropertyValue('--y'))||0;
+        layouts.set(g.card.getAttribute('href'),{
+          x:100*(originalLeft+left)/Math.max(1,boardRect.width),
+          y:originalTop+top
+        });
+        g.card.style.setProperty('--x',100*(originalLeft+left)/Math.max(1,boardRect.width)+'%');
+        g.card.style.setProperty('--y',(originalTop+top)+'px');
+        g.card.style.removeProperty('--touch-x');
+        g.card.style.removeProperty('--touch-y');
+        suppressUntil=performance.now()+500;
       }
-    }, true);
-    board.addEventListener('work:rendered', () => {
-      positions.clear();
+      try{g.card.releasePointerCapture(e.pointerId)}catch(_){}
       gesture=null;
-    });
+    };
+    board.addEventListener('pointerup',finish);
+    board.addEventListener('pointercancel',finish);
+    board.addEventListener('click',e=>{
+      if(performance.now()<suppressUntil){e.preventDefault();e.stopImmediatePropagation()}
+    },true);
   }
   /* Cursor-following DRAG! label over draggable cards only. */
   if (desktop.matches && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -240,6 +224,6 @@
     addEventListener('blur',()=>hint.classList.remove('is-visible'));
   }
   board.addEventListener('work:rendered', layout);
-  addEventListener('resize', () => { if (desktop.matches) layout(); });
+  addEventListener('resize', () => { layout(); });
   layout();
 })();
