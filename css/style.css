@@ -1401,3 +1401,25 @@ body.project-detail-page .back-to-work{
  }
  body.project-detail-page .project-page{padding-top:105px!important}
 }
+
+/* Touch gallery: hold for 300ms to drag; quick sideways swipes still browse. */
+@media (pointer:coarse) {
+  body.work-home #work #projects .project {
+    touch-action:none!important;
+    -webkit-touch-callout:none;
+    user-select:none;
+    -webkit-user-select:none;
+    transform:translate3d(var(--touch-x,0px),var(--touch-y,0px),0)!important;
+    transition:transform .08s ease-out;
+    will-change:transform;
+  }
+  body.work-home #work #projects .project.is-touch-dragging {
+    transition:none!important;
+    cursor:grabbing;
+    filter:drop-shadow(0 12px 18px rgba(0,0,0,.12));
+    scroll-snap-align:none;
+  }
+  body.work-home #work #projects.grid:has(.project.is-touch-dragging){
+    scroll-snap-type:none!important;
+  }
+}
