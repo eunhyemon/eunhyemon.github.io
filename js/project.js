@@ -27,7 +27,7 @@ function embedVideo(raw){
 }
 fetch('data/projects.json').then(r=>{if(!r.ok)throw Error('load');return r.json()}).then(items=>{
   const index=items.findIndex(p=>p.slug===slug);
-  if(index<0){root.innerHTML='<p class="empty">프로젝트를 찾을 수 없습니다. <a href="work.html">목록으로 돌아가기 ↗</a></p>';return}
+  if(index<0){root.innerHTML='<p class="empty">프로젝트를 찾을 수 없습니다. <a href="index.html">목록으로 돌아가기 ↗</a></p>';return}
   const p=items[index];document.title=p.title+' — HAILEY';
   const gallery=Array.isArray(p.media)?p.media:(Array.isArray(p.images)?p.images:[]);
   const cover=safeUrl(p.image||p.thumbnail);
@@ -35,7 +35,11 @@ fetch('data/projects.json').then(r=>{if(!r.ok)throw Error('load');return r.json(
   const summary=p.summary?'<p class="project-summary">'+esc(p.summary)+'</p>':'';
   const channelUrl=safeUrl(p.channelUrl);
   const channelLink=/^https:\/\//i.test(channelUrl)?'<p class="project-channel"><a href="'+esc(channelUrl)+'" target="_blank" rel="noopener noreferrer" aria-label="'+esc(p.title)+' 유튜브 채널 열기">VIEW CHANNEL ↗</a></p>':'';
-  root.innerHTML='<div class="project-heading"><small>'+esc(p.category||'WORK')+(p.projectType?' / '+esc(p.projectType):'')+(p.year?' / '+esc(p.year):'')+'</small><h1>'+esc(p.title)+'</h1>'+summary+channelLink+'<div class="project-facts"><span>ROLE</span><strong>'+esc(p.role||p.category||'')+'</strong></div></div><div class="project-gallery">'+visibleGallery.map(mediaItem).join('')+(p.video?embedVideo(p.video):'')+'</div>';
+  root.innerHTML='<div class="project-split">'+
+    '<aside class="project-info"><div class="project-heading"><small>'+esc(p.category||'WORK')+(p.projectType?' / '+esc(p.projectType):'')+(p.year?' / '+esc(p.year):'')+'</small>'+
+    '<h1>'+esc(p.title)+'</h1>'+summary+channelLink+
+    '<div class="project-facts"><span>ROLE</span><strong>'+esc(p.role||p.category||'')+'</strong></div></div></aside>'+
+    '<div class="project-visuals"><div class="project-gallery">'+visibleGallery.map(mediaItem).join('')+(p.video?embedVideo(p.video):'')+'</div></div></div>';
   if(!matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window){
     const elements=[...root.querySelectorAll('.project-heading,.project-media,.project-embed,.project-external')];
     const observer=new IntersectionObserver(entries=>{
@@ -49,5 +53,5 @@ fetch('data/projects.json').then(r=>{if(!r.ok)throw Error('load');return r.json(
   }
   const before=items[index-1],after=items[index+1],pager=document.getElementById('project-pager');
   pager.innerHTML=(before?'<a href="project.html?slug='+encodeURIComponent(before.slug)+'">← PREVIOUS <span>'+esc(before.title)+'</span></a>':'<span></span>')+(after?'<a href="project.html?slug='+encodeURIComponent(after.slug)+'">NEXT → <span>'+esc(after.title)+'</span></a>':'<span></span>');
-}).catch(()=>{root.innerHTML='<p class="empty">프로젝트 데이터를 불러오지 못했어요. <a href="work.html">목록으로 돌아가기 ↗</a></p>'});
+}).catch(()=>{root.innerHTML='<p class="empty">프로젝트 데이터를 불러오지 못했어요. <a href="index.html">목록으로 돌아가기 ↗</a></p>'});
 })();
