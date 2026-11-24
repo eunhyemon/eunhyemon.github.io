@@ -1549,3 +1549,54 @@ body.work-home #work-drag-hint{
   max-height:100%!important;
   object-fit:contain!important;
 }
+
+/* Monochrome selection and restrained underline affordances. */
+::selection{background:#111!important;color:#fff!important}
+::-moz-selection{background:#111!important;color:#fff!important}
+#work #projects .project::selection,
+#work #projects .project *::selection{background:#111!important;color:#fff!important}
+#work #projects .project::-moz-selection,
+#work #projects .project *::-moz-selection{background:#111!important;color:#fff!important}
+#site-header .logo,
+#site-header nav a,
+.filters button,
+.project-channel a,
+.project-external a,
+.project-pager a,
+.back-to-work,
+footer a,
+.contact a,
+.project-overlay .overlay-back{
+ text-decoration:none!important;
+ text-decoration-color:currentColor!important;
+ text-decoration-thickness:1px!important;
+ text-underline-offset:4px!important;
+ transition:opacity .18s ease,color .18s ease,text-decoration-color .18s ease;
+}
+#site-header .logo:is(:hover,:focus-visible),
+#site-header nav a:is(:hover,:focus-visible),
+.filters button:is(:hover,:focus-visible,.active),
+.project-channel a:is(:hover,:focus-visible),
+.project-external a:is(:hover,:focus-visible),
+.project-pager a:is(:hover,:focus-visible),
+.back-to-work:is(:hover,:focus-visible),
+footer a:is(:hover,:focus-visible),
+.contact a:is(:hover,:focus-visible),
+.project-overlay .overlay-back:is(:hover,:focus-visible){
+ color:var(--ink)!important;
+ opacity:1!important;
+ text-decoration:underline!important;
+ text-decoration-thickness:1px!important;
+ text-underline-offset:4px!important;
+}
+.filters button:not(.active):not(:hover):not(:focus-visible){text-decoration:none!important}
+#site-header .logo:hover,#site-header nav a:hover{opacity:1!important}
+#site-header .logo:focus-visible,#site-header nav a:focus-visible{
+ outline:1px solid currentColor!important;
+ outline-offset:6px!important;
+}
+#doodle-clear:hover,body .about-page #doodle-clear:hover{
+ color:var(--ink)!important;
+ text-decoration:underline!important;
+ text-underline-offset:4px!important;
+}
