@@ -14,7 +14,7 @@
   if(navigating||e.defaultPrevented||e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;
   const a=e.target.closest?.('a[href]');
   if(!a||a.hasAttribute('download')||(a.target&&a.target!=='_self'))return;
-  if(document.body.classList.contains('work-home') && a.classList.contains('project'))return;
+  if(document.body.classList.contains('work-home') && (a.classList.contains('project') || (document.body.classList.contains('project-open') && a.classList.contains('nav-close'))))return;
   const url=new URL(a.href,location.href);
   if(!['http:','https:'].includes(url.protocol)||url.origin!==location.origin||
      (url.pathname===location.pathname&&url.search===location.search))return;
