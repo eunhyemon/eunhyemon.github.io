@@ -813,3 +813,52 @@ body:not(.home-layout) .about,body:not(.home-layout) .contact{padding-top:clamp(
   body:not(.home-layout) .work{padding-top:15px}
   body:not(.home-layout) .about,body:not(.home-layout) .contact{padding-top:35px}
 }
+
+/* Portfolio index: Work is the landing page, with the existing interactive board. */
+.work-home .work-intro{max-width:1180px;margin:0 auto clamp(38px,5vw,74px)}
+.work-home .work-eyebrow{display:block;font:700 11px/1.5 var(--portfolio-sans);letter-spacing:.11em;color:var(--muted);margin-bottom:16px}
+.work-home .work-heading{font:600 clamp(35px,5.5vw,80px)/1.07 var(--portfolio-sans);letter-spacing:-.06em;margin:0;max-width:850px}
+.work-home .page{padding-bottom:110px}
+/* Corner navigation with an arrow revealed only by interaction. */
+#site-header .nav-arrow{display:inline-block;opacity:0;transform:translate(-5px,3px);transition:opacity .14s ease,transform .14s ease;white-space:nowrap}
+#site-header nav a:hover .nav-arrow,#site-header nav a:focus-visible .nav-arrow{opacity:1;transform:translate(0,0)}
+@media(hover:none){#site-header .nav-arrow{display:none}}
+/* Suspend old sun/moon and blink effects, without deleting their original code. */
+#site-header .theme-toggle{display:none!important}
+html,html[data-theme="dark"]{color-scheme:light}
+html[data-theme="dark"]{--bg:#fff;--ink:#111;--surface:#fff;--soft:#f3f3f3;--muted:#6f6f6f;--overlay:rgba(255,255,255,.94)}
+.friend .eyes-shut,html[data-theme="dark"] .friend .eyes-shut{display:none!important}
+.friend .eyes-open,html[data-theme="dark"] .friend .eyes-open{display:inline!important}
+.site-intro{display:none!important}
+#site-header .logo,#site-header nav a{font-weight:800!important}
+/* About: keep descriptive editorial copy, then a quiet interactive drawing area. */
+.about{padding-bottom:115px}
+.about .about-drawing{
+  position:relative;isolation:isolate;
+  width:100%;height:clamp(340px,52vw,600px);min-height:340px;
+  margin:clamp(55px,8vw,120px) auto 0;
+  padding:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;overflow:hidden
+}
+.about .about-drawing .hero-main{position:relative;z-index:1;pointer-events:none}
+.about .about-drawing .friend{
+  position:relative;top:auto;left:auto;translate:none;width:clamp(110px,14vw,175px)
+}
+.about .about-drawing #doodle-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:2}
+.about .about-drawing #doodle-clear{
+  position:absolute;z-index:5;bottom:17px;left:50%;transform:translateX(-50%);
+  rotate:0!important;translate:none;width:auto;height:auto;min-height:34px;
+  padding:8px 12px;clip-path:none;background:transparent;color:var(--ink);
+  border:0;font:700 10px/1.4 var(--portfolio-sans);letter-spacing:.08em
+}
+.about .about-drawing #doodle-clear .scribble-ring{display:none!important}
+.about .about-drawing #doodle-clear span{transform:none;translate:none;rotate:0}
+.about .about-drawing #doodle-clear:hover{color:var(--accent);background:transparent}
+.about .about-drawing #doodle-hint{font:600 10px/1 var(--portfolio-sans);letter-spacing:.08em;rotate:0;transform:translate(12px,18px)}
+.about .about-drawing #eye-tilt-permission,.about .about-drawing #eye-touch-hint{display:none!important}
+@media(max-width:750px){
+ .work-home .work-heading{font-size:clamp(30px,8vw,48px)}
+ .work-home .work-intro{margin-bottom:34px}
+ .about .about-drawing{height:430px;margin-top:58px}
+ .about .about-drawing .friend{width:135px}
+}
