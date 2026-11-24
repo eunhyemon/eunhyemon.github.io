@@ -51,14 +51,13 @@
    el.setAttribute('role','dialog');
    el.setAttribute('aria-modal','true');
    el.setAttribute('aria-label',project.title+' project detail');
-   el.innerHTML='<div class="project-overlay-scroll"><div class="project-overlay-inner">'+
-    '<div class="project-overlay-cover"><img src="'+esc(hero)+'" alt="'+esc(project.title)+' project thumbnail"></div>'+
-    '<div class="project-overlay-content"><div class="project-overlay-body">'+
-    '<div class="project-heading"><small>'+esc(project.category||'WORK')+(project.projectType?' / '+esc(project.projectType):'')+'</small>'+
+   el.innerHTML='<div class="project-overlay-scroll"><div class="project-overlay-inner project-split">'+
+    '<aside class="project-info"><div class="project-heading"><small>'+esc(project.category||'WORK')+(project.projectType?' / '+esc(project.projectType):'')+'</small>'+
     '<h1>'+esc(project.title)+'</h1>'+(project.summary?'<p class="project-summary">'+esc(project.summary)+'</p>':'')+
     (channel&&channel.startsWith('https://')?'<p class="project-channel"><a href="'+esc(channel)+'" target="_blank" rel="noopener noreferrer">VIEW CHANNEL ↗</a></p>':'')+
-    '<div class="project-facts"><span>ROLE</span><strong>'+esc(project.role||project.category||'')+'</strong></div></div>'+
-    '<div class="project-gallery">'+images.map(makeMedia).join('')+(project.video?videoMarkup(project.video):'')+'</div>'+
+    '<div class="project-facts"><span>ROLE</span><strong>'+esc(project.role||project.category||'')+'</strong></div></div></aside>'+
+    '<div class="project-visuals"><div class="project-overlay-cover"><img src="'+esc(hero)+'" alt="'+esc(project.title)+' project thumbnail"></div>'+
+    '<div class="project-overlay-content"><div class="project-gallery">'+images.map(makeMedia).join('')+(project.video?videoMarkup(project.video):'')+'</div>'+
     '<button class="overlay-back" type="button">← BACK TO WORK</button></div></div></div></div>';
    el.querySelector('.overlay-back').addEventListener('click',close);
    return el;
