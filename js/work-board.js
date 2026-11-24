@@ -211,7 +211,9 @@
       const visible=!!card && board.contains(card);
       hint.classList.toggle('is-visible',visible);
       if(visible){
-        hint.style.left=Math.min(e.clientX,innerWidth-85)+'px';
+        const dragging=card.classList.contains('is-dragging');
+        hint.textContent=dragging?'DRAG!':(card.querySelector('.meta h3')?.textContent?.trim() || 'VIEW WORK');
+        hint.style.left=Math.min(e.clientX,innerWidth-180)+'px';
         hint.style.top=Math.min(e.clientY,innerHeight-45)+'px';
       }
     };
