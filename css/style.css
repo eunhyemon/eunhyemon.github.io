@@ -1150,8 +1150,7 @@ body .about-page #doodle-clear:hover{color:var(--accent)}
 }
 body.project-detail-page #site-header .nav-close,
 body.project-open #site-header .nav-close{display:inline-block!important}
-body.project-detail-page #site-header .nav-about,
-body.project-open #site-header .nav-about{display:none!important}
+/* ABOUT remains visible at bottom-left, including opened projects. */
 #site-header .nav-close span{font-size:1.45em;vertical-align:-.055em}
 #work-drag-hint{
   font-family:"DM Sans","LineSeed",Arial,sans-serif!important;
