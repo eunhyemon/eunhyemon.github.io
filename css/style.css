@@ -1600,3 +1600,101 @@ footer a:is(:hover,:focus-visible),
  text-decoration:underline!important;
  text-underline-offset:4px!important;
 }
+
+/* Minimal three-corner navigation: ABOUT replaces CLOSE at the top-right. */
+#site-header nav .nav-about,
+#site-header nav a:nth-of-type(1){
+  position:fixed!important;
+  top:clamp(22px,4vw,50px)!important;
+  right:clamp(22px,4vw,64px)!important;
+  bottom:auto!important;
+  left:auto!important;
+}
+#site-header nav .nav-contact,
+#site-header nav a:nth-of-type(2){
+  position:fixed!important;
+  top:auto!important;
+  right:clamp(22px,4vw,64px)!important;
+  bottom:clamp(26px,4vw,55px)!important;
+  left:auto!important;
+}
+#site-header nav .nav-close,
+#site-header nav a:nth-of-type(3){
+  position:fixed!important;
+  top:clamp(22px,4vw,50px)!important;
+  right:clamp(22px,4vw,64px)!important;
+  bottom:auto!important;
+  left:auto!important;
+  display:none!important;
+}
+body.project-open #site-header .nav-about,
+body.project-detail-page #site-header .nav-about{display:none!important}
+body.project-open #site-header .nav-close,
+body.project-detail-page #site-header .nav-close{display:inline-flex!important}
+
+/* Text trim / clipped roll: tiny editorial motion, no arrows, color shifts or chips. */
+#site-header .logo,
+#site-header nav a{
+  display:inline-flex!important;
+  align-items:center;
+  text-decoration:none!important;
+  overflow:visible;
+  opacity:1!important;
+  color:var(--ink)!important;
+  transform:none!important;
+  rotate:0deg!important;
+}
+#site-header .logo:hover,
+#site-header nav a:hover,
+#site-header .logo:focus-visible,
+#site-header nav a:focus-visible{
+  text-decoration:none!important;
+  opacity:1!important;
+  color:var(--ink)!important;
+  rotate:0deg!important;
+}
+#site-header .nav-roll{
+  display:block;
+  position:relative;
+  height:1.18em;
+  line-height:1.18;
+  overflow:hidden;
+  white-space:nowrap;
+}
+#site-header .nav-roll-line{
+  display:block;
+  height:1.18em;
+  line-height:1.18;
+  transition:transform .42s cubic-bezier(.22,1,.36,1);
+  will-change:transform;
+}
+@media(hover:hover) and (pointer:fine){
+  #site-header .logo:hover .nav-roll-line,
+  #site-header nav a:hover .nav-roll-line,
+  #site-header .logo:focus-visible .nav-roll-line,
+  #site-header nav a:focus-visible .nav-roll-line{
+    transform:translateY(-100%);
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  #site-header .nav-roll-line{transition:none!important;will-change:auto}
+  #site-header .logo:hover .nav-roll-line,
+  #site-header nav a:hover .nav-roll-line,
+  #site-header .logo:focus-visible .nav-roll-line,
+  #site-header nav a:focus-visible .nav-roll-line{transform:none!important}
+}
+@media(max-width:750px){
+  #site-header nav .nav-about,#site-header nav a:nth-of-type(1),
+  #site-header nav .nav-close,#site-header nav a:nth-of-type(3){
+    top:25px!important;
+    right:20px!important;
+    left:auto!important;
+    bottom:auto!important;
+  }
+  #site-header nav .nav-contact,#site-header nav a:nth-of-type(2){
+    top:auto!important;
+    right:20px!important;
+    left:auto!important;
+    bottom:max(25px,env(safe-area-inset-bottom))!important;
+  }
+}
