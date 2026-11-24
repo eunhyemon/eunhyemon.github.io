@@ -949,3 +949,11 @@ body.work-home #work #projects.grid{
  #site-header nav a:nth-of-type(1){top:25px!important;right:20px!important;left:auto!important;bottom:auto!important}
  #site-header nav a:nth-of-type(2){bottom:max(25px,env(safe-area-inset-bottom))!important;right:20px!important;left:auto!important;top:auto!important}
 }
+
+/* Soft editorial page transitions, without changing the current page interactions. */
+@media(prefers-reduced-motion:no-preference){
+  html.page-entering body{opacity:0;transform:translateY(9px)}
+  html.page-leaving body{opacity:0;transform:translateY(-7px);pointer-events:none}
+  html body{transition:opacity .22s ease,transform .22s cubic-bezier(.2,.7,.2,1)}
+}
+@media(prefers-reduced-motion:reduce){html body{transition:none!important}}
